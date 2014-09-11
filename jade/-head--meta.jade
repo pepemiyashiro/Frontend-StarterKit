@@ -1,0 +1,25 @@
+meta(name='title', content='#{page.title}')
+meta(name='description', content='#{page.description}')
+meta(name='keywords', content='#{page.keywords}')
+meta(name='author', content='#{page.author}')
+meta(name='viewport', content='width=device-width, initial-scale=1.0')
+meta(name='language', content='#{page.lang}')
+meta(name='robots', content='index,follow')
+
+// GEO: Tags
+meta(name='geo.region', content='#{page.geo_region}')
+meta(name='geo.placename', content='#{page.geo_placename}')
+meta(name='geo.position', content='#{page.geo_position}')
+meta(name='ICBM', content='#{page.geo_position}')
+
+// open graph
+meta(property='og:title', content='#{page.title} | #{page.url}')
+meta(property='og:description', content='#{page.description}')
+meta(property='og:image', content='#{page.img}')
+
+meta(name="DC.Title", content="#{page.title}")
+meta(name="DC.Creator", content="#{page.name}")
+meta(name="DC.Description", content="#{page.description}")
+meta(name="DC.Publisher", content="#{page.name}")
+meta(name="DC.Contributor", content="#{page.developer}")
+meta(name="DC.Language", content="#{page.lang}")
