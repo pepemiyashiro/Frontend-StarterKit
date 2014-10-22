@@ -6,6 +6,8 @@ var gulp = require('gulp'),
     nib = require('nib'),
     jade = require('gulp-jade'),
     browserSync = require('browser-sync'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin');
 
 // ===============
@@ -20,7 +22,15 @@ var path = {
 
     // Stylus to CSS
     stylus: ['source/stylus/*.styl'],
-    css: 'dist/css'
+    css: 'dist/css',
+
+    // Javascript
+    srcjs: ['source/javascript/*.js'],
+    distjs: 'dist/js',
+
+   	// Images
+   	srcimg: ['source/images/*.*'],
+   	distimg: 'dist/img'
 };
 
 
@@ -49,10 +59,21 @@ gulp.task('css', function () {
     .pipe(gulp.dest(path.css));
 });
 
+// IMAGES
+
 gulp.task('img', function () {
-    return gulp.src(['source/images/*.*'])
+    return gulp.src(path.srcimg)
         .pipe(imagemin())
-        .pipe(gulp.dest('dist/img/'));
+        .pipe(gulp.dest(path.distimg));
+});
+
+// JAVASCRIPT
+
+gulp.task('js', function () {
+  gulp.src(path.srcjs)
+  .pipe(concat('main.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest(path.distjs))
 });
 
 // WATCH
@@ -60,6 +81,8 @@ gulp.task('img', function () {
 gulp.task('watch', function() {
     gulp.watch(path.jade, ['html']);
     gulp.watch(path.stylus, ['css']);
+    gulp.watch(path.srcjs, ['js']);
+    gulp.watch(path.srcimg, ['img']);
 });
 
 // BROWSER SYNC
@@ -73,4 +96,4 @@ gulp.task('sync', function() {
 });
 
 // DEFAULT
-gulp.task('default', ['html', 'css', 'watch', 'sync']);
+gulp.task('default', ['html', 'css', 'js', 'img', 'watch', 'sync']);
