@@ -10,4 +10,4 @@ jade/-config.jade
 $ npm install nib -g
 
 **Gulp dependencies**
-npm install --save-dev gulp gulp-jade gulp-stylus
+npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync
