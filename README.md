@@ -10,4 +10,7 @@ jade/-config.jade
 $ npm install -g gulp
 
 **Instalar dependencias de Gulp**
-npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync
+
+**Para trabajar y syncronizar cambios usar:**
+$ gulp
