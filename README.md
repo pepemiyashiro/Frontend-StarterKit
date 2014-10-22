@@ -12,7 +12,7 @@ $ npm install -g gulp
 
 **Instalar dependencias de Gulp**
 
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin
 
 **Para trabajar y syncronizar cambios usar:**
 

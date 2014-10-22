@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     nib = require('nib'),
     jade = require('gulp-jade'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    imagemin = require('gulp-imagemin');
 
 // ===============
 // Paths
@@ -14,12 +15,12 @@ var gulp = require('gulp'),
 var path = {
 
 		// Jade to HTML
-    jade: ['jade/*.jade'],
-    html: 'deploy/',
+    jade: ['source/jade/*.jade'],
+    html: 'dist/',
 
     // Stylus to CSS
-    stylus: ['stylus/*.styl'],
-    css: 'deploy/css'
+    stylus: ['source/stylus/*.styl'],
+    css: 'dist/css'
 };
 
 
@@ -48,6 +49,12 @@ gulp.task('css', function () {
     .pipe(gulp.dest(path.css));
 });
 
+gulp.task('img', function () {
+    return gulp.src(['source/images/*.*'])
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/img/'));
+});
+
 // WATCH
 
 gulp.task('watch', function() {
@@ -58,9 +65,9 @@ gulp.task('watch', function() {
 // BROWSER SYNC
 
 gulp.task('sync', function() {
-    browserSync.init('deploy/**/*', {
+    browserSync.init('dist/**/*', {
         server: {
-            baseDir: 'deploy/'
+            baseDir: 'dist/'
         }
     });
 });
