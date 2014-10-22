@@ -9,5 +9,5 @@ jade/-config.jade
 **Instalar enterminal nib:**
 $ npm install nib -g
 
-**Compilar con librería nib:**
-stylus -u nib -w -c -o deploy/css
+**Gulp dependencies**
+npm install --save-dev gulp gulp-jade gulp-stylus
