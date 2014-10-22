@@ -6,8 +6,8 @@ jade/-config.jade
 
 ### compilar usando la librería nib, de la siguiente manera: ###
 
-**Instalar enterminal nib:**
-$ npm install nib -g
+**Instalar Gulp:**
+$ npm install -g gulp
 
 **Gulp dependencies**
 npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync
