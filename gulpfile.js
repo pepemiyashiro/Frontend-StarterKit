@@ -8,6 +8,9 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish'),
+    newer = require('gulp-newer'),
     imagemin = require('gulp-imagemin');
 
 // ===============
@@ -17,20 +20,20 @@ var gulp = require('gulp'),
 var path = {
 
 		// Jade to HTML
-    jade: ['source/jade/*.jade'],
-    html: 'dist/',
+    jade_src: ['source/jade/*.jade'],
+    html_dist: 'dist/',
 
     // Stylus to CSS
-    stylus: ['source/stylus/*.styl'],
-    css: 'dist/css',
+    stylus_src: ['source/stylus/*.styl'],
+    css_dist: 'dist/css',
 
     // Javascript
-    srcjs: ['source/javascript/*.js'],
-    distjs: 'dist/js',
+    js_src: ['source/javascript/*.js'],
+    js_dist: 'dist/js',
 
    	// Images
-   	srcimg: ['source/images/*.*'],
-   	distimg: 'dist/img'
+   	img_src: ['source/images/*.*'],
+   	img_dist: 'dist/img'
 };
 
 
@@ -41,39 +44,43 @@ var path = {
 // JADE - HTML
 
 gulp.task('html', function() {
-    return gulp.src(path.jade)
+    return gulp.src(path.jade_src)
+    .pipe(newer(path.html_dist))
     .pipe(jade({
         pretty: true
     }))
-    .pipe(gulp.dest(path.html));
+    .pipe(gulp.dest(path.html_dist));
 });
 
 // STYLUS - CSS
 
 gulp.task('css', function () {
-    return gulp.src(path.stylus)
+    return gulp.src(path.stylus_src)
+    .pipe(newer(path.css_dist))
     .pipe(stylus({
  	   		use: nib(),
         compress: true
     }))
-    .pipe(gulp.dest(path.css));
+    .pipe(gulp.dest(path.css_dist));
 });
 
 // IMAGES
 
 gulp.task('img', function () {
-    return gulp.src(path.srcimg)
+    return gulp.src(path.img_src)
         .pipe(imagemin())
-        .pipe(gulp.dest(path.distimg));
+        .pipe(gulp.dest(path.img_dist));
 });
 
 // JAVASCRIPT
 
 gulp.task('js', function () {
-  gulp.src(path.srcjs)
+  gulp.src(path.js_src)
   .pipe(concat('main.js'))
+  .pipe(jshint())
+  .pipe(jshint.reporter(stylish))
   .pipe(uglify())
-  .pipe(gulp.dest(path.distjs))
+  .pipe(gulp.dest(path.js_dist))
 });
 
 // WATCH
@@ -81,8 +88,8 @@ gulp.task('js', function () {
 gulp.task('watch', function() {
     gulp.watch(path.jade, ['html']);
     gulp.watch(path.stylus, ['css']);
-    gulp.watch(path.srcjs, ['js']);
-    gulp.watch(path.srcimg, ['img']);
+    gulp.watch(path.js_src, ['js']);
+    gulp.watch(path.img_src, ['img']);
 });
 
 // BROWSER SYNC

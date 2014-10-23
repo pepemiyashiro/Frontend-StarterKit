@@ -1,1 +1,1 @@
-console.log("main JS");
+Main=function(o){var n="soy test";return{demo:function(){console.log(n),console.log(o("body"))}}}(jQuery),Main.demo();
