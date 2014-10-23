@@ -2,18 +2,24 @@
 ## Editar el Config File ##
 jade/-config.jade
 
-## Stylus  ##
-
-### compilar usando la librería nib, de la siguiente manera: ###
-
 **Instalar Gulp:**
 
 $ npm install -g gulp
 
+**Crear el Archivo gulpfile.js (si no existiera)**
+
+**Iniciar el proyecto, ejecutar:**
+
+$ npm init
+
 **Instalar dependencias de Gulp**
 
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin gulp-concat gulp-uglify
 
-**Para trabajar y syncronizar cambios usar:**
+**Para trabajar, syncronizar y actualizar los cambios en el browser usar:**
 
 $ gulp
+
+**Para usar una tarea específica**
+
+$ gulp NombreDelTask (revisar gulpfile.js)
