@@ -86,8 +86,8 @@ gulp.task('js', function () {
 // WATCH
 
 gulp.task('watch', function() {
-    gulp.watch(path.jade, ['html']);
-    gulp.watch(path.stylus, ['css']);
+    gulp.watch(path.jade_src, ['html']);
+    gulp.watch(path.stylus_src, ['css']);
     gulp.watch(path.js_src, ['js']);
     gulp.watch(path.img_src, ['img']);
 });

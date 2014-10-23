@@ -1,1 +1,1 @@
-Main=function(o){var n="soy test";return{demo:function(){console.log(n),console.log(o("body"))}}}(jQuery),Main.demo();
+Main=function(){var n="soy test";return{demo:function(){console.log(n)}}}(jQuery),Main.demo();

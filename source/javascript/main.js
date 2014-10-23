@@ -6,7 +6,6 @@ Main = (function($) {
         // Demo
         demo: function() {
             console.log(test);
-            console.log($('body'));
         }
     };
 

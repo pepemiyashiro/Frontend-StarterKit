@@ -14,7 +14,7 @@ $ npm init
 
 **Instalar dependencias de Gulp**
 
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish jshint
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish jshint gulp-newer
 
 **Para trabajar, syncronizar y actualizar los cambios en el browser usar:**
 
