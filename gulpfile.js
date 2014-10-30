@@ -19,7 +19,7 @@ var gulp = require('gulp'),
 
 var path = {
 
-		// Jade to HTML
+    // Jade to HTML
     jade_src: ['source/jade/*.jade'],
     html_dist: 'dist/',
 
@@ -31,9 +31,9 @@ var path = {
     js_src: ['source/javascript/*.js'],
     js_dist: 'dist/js',
 
-   	// Images
-   	img_src: ['source/images/*.*'],
-   	img_dist: 'dist/img'
+    // Images
+    img_src: ['source/images/*.*'],
+    img_dist: 'dist/img'
 };
 
 
@@ -45,28 +45,28 @@ var path = {
 
 gulp.task('html', function() {
     return gulp.src(path.jade_src)
-    .pipe(newer(path.html_dist))
-    .pipe(jade({
-        pretty: true
-    }))
-    .pipe(gulp.dest(path.html_dist));
+        .pipe(newer(path.html_dist))
+        .pipe(jade({
+            pretty: true
+        }))
+        .pipe(gulp.dest(path.html_dist));
 });
 
 // STYLUS - CSS
 
-gulp.task('css', function () {
+gulp.task('css', function() {
     return gulp.src(path.stylus_src)
-    .pipe(newer(path.css_dist))
-    .pipe(stylus({
- 	   		use: nib(),
-        compress: true
-    }))
-    .pipe(gulp.dest(path.css_dist));
+        .pipe(newer(path.css_dist))
+        .pipe(stylus({
+            use: nib(),
+            compress: true
+        }))
+        .pipe(gulp.dest(path.css_dist));
 });
 
 // IMAGES
 
-gulp.task('img', function () {
+gulp.task('img', function() {
     return gulp.src(path.img_src)
         .pipe(imagemin())
         .pipe(gulp.dest(path.img_dist));
@@ -74,13 +74,13 @@ gulp.task('img', function () {
 
 // JAVASCRIPT
 
-gulp.task('js', function () {
-  gulp.src(path.js_src)
-  .pipe(concat('main.js'))
-  .pipe(jshint())
-  .pipe(jshint.reporter(stylish))
-  .pipe(uglify())
-  .pipe(gulp.dest(path.js_dist))
+gulp.task('js', function() {
+    gulp.src(path.js_src)
+        .pipe(concat('main.js'))
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.js_dist))
 });
 
 // WATCH
