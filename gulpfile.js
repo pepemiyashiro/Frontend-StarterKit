@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     newer = require('gulp-newer'),
-    imagemin = require('gulp-imagemin');
+    imagemin = require('gulp-imagemin'),
+    gutil = require('gulp-util');
 
 // ===============
 // Paths
@@ -36,6 +37,18 @@ var path = {
     img_dist: 'dist/img'
 };
 
+// ===============
+// Error Handler
+// ===============
+
+var handleError;
+
+handleError = function(err) {
+    gutil.log(err);
+    gutil.beep();
+    return this.emit('end');
+};
+
 
 // ===============
 // Tasks
@@ -49,6 +62,7 @@ gulp.task('html', function() {
         .pipe(jade({
             pretty: true
         }))
+        .on('error', handleError)
         .pipe(gulp.dest(path.html_dist));
 });
 
@@ -61,6 +75,7 @@ gulp.task('css', function() {
             use: nib(),
             compress: true
         }))
+        .on('error', handleError)
         .pipe(gulp.dest(path.css_dist));
 });
 
