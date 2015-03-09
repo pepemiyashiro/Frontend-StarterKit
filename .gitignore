@@ -1,2 +1,3 @@
-dist/* 
-node_modules/*
+# exclude everything except directory foo/bar
+/dist
+/node_modules
