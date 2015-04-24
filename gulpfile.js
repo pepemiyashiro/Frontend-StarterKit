@@ -15,6 +15,8 @@ var gulp = require('gulp'),
     pngmin = require('gulp-pngmin'),
     plumber = require('gulp-plumber'),
     spritesmith  = require('gulp.spritesmith'),
+    imageResize  = require('gulp-image-resize'),
+    rename  = require('gulp-rename'),
     gutil = require('gulp-util');
 
 
@@ -141,7 +143,7 @@ gulp.task('sprite', function() {
     var spriteData = 
         gulp.src(path.img_src + '/sprite/*.*')
             .pipe(spritesmith({
-                imgName: 'sprite.png',
+                imgName: 'sprite@2x.png',
                 cssName: 'sprite.styl',
                 cssFormat: 'stylus',
                 algorithm: 'binary-tree',
@@ -151,7 +153,17 @@ gulp.task('sprite', function() {
                 }
             }));
 
-    spriteData.img.pipe(gulp.dest(path.img_dist)); 
+    spriteData.img.pipe(gulp.dest(path.img_dist));
+    spriteData.img
+        .pipe(imageResize({ 
+            width : '50%',
+            filter: 'Catrom',
+            sharpen: true
+        }))
+        .pipe(rename(function (path) { 
+            path.basename = "sprite"; 
+        }))
+        .pipe(gulp.dest(path.img_dist));
     spriteData.css.pipe(gulp.dest(path.stylus));
 });
 

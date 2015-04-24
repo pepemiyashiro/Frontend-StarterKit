@@ -546,22 +546,31 @@ body {
   font-size: 14px;
 }
 .icon-home {
-  background-image: url("../img/sprite.png");
-  background-position: 0px -28px;
-  width: 28px;
-  height: 28px;
+  background-image: url("../img/sprite@2x.png");
+  -webkit-background-size: 28px;
+  -moz-background-size: 28px;
+  background-size: 28px;
+  background-position: 0px -14px;
+  width: 14px;
+  height: 14px;
 }
 .icon-hello {
-  background-image: url("../img/sprite.png");
-  background-position: -28px 0px;
-  width: 28px;
-  height: 28px;
+  background-image: url("../img/sprite@2x.png");
+  -webkit-background-size: 28px;
+  -moz-background-size: 28px;
+  background-size: 28px;
+  background-position: -14px 0px;
+  width: 14px;
+  height: 14px;
 }
 .icon-love {
-  background-image: url("../img/sprite.png");
-  background-position: -28px -28px;
-  width: 28px;
-  height: 28px;
+  background-image: url("../img/sprite@2x.png");
+  -webkit-background-size: 28px;
+  -moz-background-size: 28px;
+  background-size: 28px;
+  background-position: -14px -14px;
+  width: 14px;
+  height: 14px;
 }
 .ir {
   background-color: transparent;

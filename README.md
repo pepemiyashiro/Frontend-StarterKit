@@ -8,16 +8,22 @@ $ npm install -g gulp
 
 $ npm init
 
-**Instalar pngquant para el generador de sprites**
+**Instalar aplicaciones para OSX**
 
-Instalar desde:
-https://pngquant.org/
+Instalar 
 
-o 
+Bower:
+$ npm install -g bower
 
-Instalar desde Brew:
-
+pngquant:
+https://pngquant.org/ o Instalar desde Brew: 
 $ brew install pngquant
+
+Imagemagik:
+$ brew install imagemagick
+
+Graphics Magik
+$ brew install graphicsmagick
 
 **Instalar dependencias de Gulp**
 
