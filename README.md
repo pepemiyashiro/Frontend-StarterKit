@@ -1,12 +1,8 @@
-# Jade html5-boilerplate #
-
-**INFO**
+# Web Starter #
 
 **Instalar Gulp:**
 
 $ npm install -g gulp
-
-**Crear el Archivo gulpfile.js (si no existiera)**
 
 **Iniciar el proyecto, ejecutar:**
 
