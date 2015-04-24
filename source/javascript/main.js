@@ -1,3 +1,7 @@
+/*
+** Aunt Poison and the Alien Mindbenders
+*/
+
 Main = (function($) {
 
     var test = "soy test";
