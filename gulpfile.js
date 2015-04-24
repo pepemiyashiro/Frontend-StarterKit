@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngmin = require('gulp-pngmin'),
     plumber = require('gulp-plumber'),
+    spritesmith  = require('gulp.spritesmith'),
     gutil = require('gulp-util');
 
 
@@ -25,22 +26,25 @@ var gulp = require('gulp'),
 var path = {
 
     // Bower
-    bower: ['bower_components'],
+    bower: 'bower_components',
 
     // Jade to HTML
-    jade: ['source/jade/*.jade'],
+    jade: 'source/jade/*.jade',
 
     // Stylus to CSS
-    stylus: ['source/stylus'],
+    stylus: 'source/stylus',
 
     // Javascript
-    js: ['source/javascript'],
+    js: 'source/javascript',
 
     // Jpg
-    jpg: ['source/images/*.jpg'],
+    jpg: 'source/images/*.jpg',
 
     // Png
-    png: ['source/images/*.png'],
+    png: 'source/images/*.png',
+
+    // IMG Source
+    img_src: 'source/images',
 
     // IMG
     img_dist: 'dist/img',
@@ -84,7 +88,7 @@ gulp.task('html', function() {
 // STYLUS - CSS
 
 gulp.task('css', function() {
-    return gulp.src(path.stylus + '/*.styl')
+    return gulp.src(path.stylus + '/style.styl')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -98,7 +102,7 @@ gulp.task('css', function() {
 });
 
 gulp.task('minify-css', function() {
-    return gulp.src(path.stylus + '/*.styl')
+    return gulp.src(path.stylus + '/style.styl')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -111,7 +115,7 @@ gulp.task('minify-css', function() {
         .pipe(gulp.dest(path.css_dist));
 });
 
-// JPG
+// IMAGES
 
 gulp.task('jpg', function() {
     return gulp.src(path.jpg)
@@ -123,9 +127,6 @@ gulp.task('jpg', function() {
         .pipe(gulp.dest(path.img_dist));
 });
 
-
-// PNG
-
 gulp.task('png', function() {
     return gulp.src(path.png)
         .pipe(plumber({
@@ -134,6 +135,24 @@ gulp.task('png', function() {
         .pipe(pngmin())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.img_dist));
+});
+
+gulp.task('sprite', function() {
+    var spriteData = 
+        gulp.src(path.img_src + '/sprite/*.*')
+            .pipe(spritesmith({
+                imgName: 'sprite.png',
+                cssName: 'sprite.styl',
+                cssFormat: 'stylus',
+                algorithm: 'binary-tree',
+                cssTemplate: 'stylus.template.mustache',
+                cssVarMap: function(sprite) {
+                    sprite.name = 'spr-' + sprite.name
+                }
+            }));
+
+    spriteData.img.pipe(gulp.dest(path.img_dist)); 
+    spriteData.css.pipe(gulp.dest(path.stylus));
 });
 
 // JAVASCRIPT
@@ -179,8 +198,7 @@ gulp.task('watch', function() {
     gulp.watch(path.jade, ['html']);
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
-    gulp.watch(path.jpg, ['jpg']);
-    gulp.watch(path.png, ['png']);
+    gulp.watch(path.img_src+'/**/*.*', ['sprite', 'jpg' , 'png']);
 });
 
 // BROWSER SYNC
@@ -194,7 +212,7 @@ gulp.task('sync', function() {
 });
 
 // DEPLOY
-gulp.task('deploy', ['html', 'minify-css', 'minify-js', 'jpg', 'js-lint', 'png']);
+gulp.task('deploy', ['html', 'minify-css', 'minify-js', 'sprite', 'jpg', 'js-lint', 'png']);
 
 // DEFAULT
-gulp.task('default', ['html', 'css', 'js', 'jpg', 'js-lint', 'png', 'watch', 'sync']);
+gulp.task('default', ['html', 'css', 'js', 'sprite', 'jpg', 'js-lint', 'png', 'watch', 'sync']);

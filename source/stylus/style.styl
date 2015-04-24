@@ -1,13 +1,31 @@
 @import "nib"
 @import "nib/gradients"
-@import "css/normalize"
-@import "css/main"
+@import "normalize"
+@import "h5b"
+@import "sprite"
+@import "mixins"
+@import "general"
+
+
 
 fontsize = 14px
 
 body
 	font-size: fontsize
 	
+.icon-home
+	sprite(spr-home)
 
-@import "css/mediaqueries"
-@import "css/helpers-print"
+.icon-hello
+	sprite(spr-hello)
+
+.icon-love
+	sprite(spr-love)
+
+
+	
+
+
+
+@import "mediaqueries"
+@import "helpers-print"
