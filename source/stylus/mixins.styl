@@ -14,9 +14,9 @@ spriteImage($sprite) {
   background-image: url(../img/$sprite[8]);
 }
 
-sprite($sprite) {
-  spriteImage($sprite)
-  spritePosition($sprite)
-  spriteWidth($sprite)
-  spriteHeight($sprite)
-}
+sprite($sprite)
+    if !match('hover', selector()) && !match('active', selector())
+        spriteImage($sprite)
+    spritePosition($sprite)
+    spriteWidth($sprite)
+    spriteHeight($sprite)

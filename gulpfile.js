@@ -145,7 +145,7 @@ gulp.task('sprite', function() {
                 cssName: 'sprite.styl',
                 cssFormat: 'stylus',
                 algorithm: 'binary-tree',
-                cssTemplate: 'stylus.template.mustache',
+                cssTemplate: path.stylus+'/template/stylus.template.mustache',
                 cssVarMap: function(sprite) {
                     sprite.name = 'spr-' + sprite.name
                 }

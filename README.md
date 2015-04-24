@@ -8,6 +8,17 @@ $ npm install -g gulp
 
 $ npm init
 
+**Instalar pngquant para el generador de sprites**
+
+Instalar desde:
+https://pngquant.org/
+
+o 
+
+Instalar desde Brew:
+
+$ brew install pngquant
+
 **Instalar dependencias de Gulp**
 
 $ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-newer gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith
