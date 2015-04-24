@@ -26,31 +26,22 @@ var gulp = require('gulp'),
 
 
 var path = {
-
     // Bower
     bower: 'bower_components',
-
     // Jade to HTML
     jade: 'source/jade/*.jade',
-
     // Stylus to CSS
     stylus: 'source/stylus',
-
     // Javascript
     js: 'source/javascript',
-
     // Jpg
     jpg: 'source/images/*.jpg',
-
     // Png
     png: 'source/images/*.png',
-
     // IMG Source
     img_src: 'source/images',
-
     // IMG
     img_dist: 'dist/img',
-
     // Dist Folder
     dist: 'dist/',
     css_dist: 'dist/css',
@@ -124,6 +115,7 @@ gulp.task('jpg', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(newer(path.img_dist))
         .pipe(imagemin())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.img_dist));
@@ -134,6 +126,7 @@ gulp.task('png', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(newer(path.img_dist))
         .pipe(pngmin())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.img_dist));
@@ -142,6 +135,7 @@ gulp.task('png', function() {
 gulp.task('sprite', function() {
     var spriteData = 
         gulp.src(path.img_src + '/sprite/*.*')
+            .pipe(newer(path.img_src + '/sprite/*.*'))
             .pipe(spritesmith({
                 imgName: 'sprite@2x.png',
                 cssName: 'sprite.styl',
@@ -153,7 +147,8 @@ gulp.task('sprite', function() {
                 }
             }));
 
-    spriteData.img.pipe(gulp.dest(path.img_dist));
+    spriteData.img
+        .pipe(gulp.dest(path.img_dist));
     spriteData.img
         .pipe(imageResize({ 
             width : '50%',
@@ -175,6 +170,7 @@ gulp.task('js', function() {
             path.bower + '/jquery-validation/dist/jquery.validate.min.js',
             path.js + '/*.js'
         ])
+        .pipe(newer(path.js_dist))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(path.js_dist));
     return gulp.src(path.bower + '/modernizr/modernizr.js')
@@ -185,6 +181,7 @@ gulp.task('js-lint', function() {
     gulp.src([
             path.js + '/*.js'
         ])
+        .pipe(newer(path.js_dist))
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
@@ -195,6 +192,7 @@ gulp.task('minify-js', function() {
             path.bower + '/jquery-validation/dist/jquery.validate.min.js',
             path.js + '/*.js'
         ])
+        .pipe(newer(path.js_dist))
         .pipe(uglify())
         .pipe(concat('main.js'))
         .pipe(gulp.dest(path.js_dist));
