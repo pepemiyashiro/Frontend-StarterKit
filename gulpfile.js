@@ -17,6 +17,8 @@ var gulp = require('gulp'),
     spritesmith  = require('gulp.spritesmith'),
     imageResize  = require('gulp-image-resize'),
     rename  = require('gulp-rename'),
+    iconfont  = require('gulp-iconfont'),
+    iconfontCss = require('gulp-iconfont-css'),
     gutil = require('gulp-util');
 
 
@@ -38,6 +40,8 @@ var path = {
     jpg: 'source/images/*.jpg',
     // Png
     png: 'source/images/*.png',
+    // Fonts
+    icons: 'source/svg/icons/*.svg',
     // IMG Source
     img_src: 'source/images',
     // IMG
@@ -45,7 +49,8 @@ var path = {
     // Dist Folder
     dist: 'dist/',
     css_dist: 'dist/css',
-    js_dist: 'dist/js'
+    js_dist: 'dist/js',
+    font_dist: 'dist/fonts'
 };
 
 // ===============
@@ -133,7 +138,7 @@ gulp.task('png', function() {
 });
 
 gulp.task('sprite', function() {
-    var spriteData = 
+    var spriteData =
         gulp.src(path.img_src + '/sprite/*.*')
             .pipe(newer(path.img_src + '/sprite/*.*'))
             .pipe(spritesmith({
@@ -150,13 +155,13 @@ gulp.task('sprite', function() {
     spriteData.img
         .pipe(gulp.dest(path.img_dist));
     spriteData.img
-        .pipe(imageResize({ 
+        .pipe(imageResize({
             width : '50%',
             filter: 'Catrom',
             sharpen: true
         }))
-        .pipe(rename(function (path) { 
-            path.basename = "sprite"; 
+        .pipe(rename(function (path) {
+            path.basename = "sprite";
         }))
         .pipe(gulp.dest(path.img_dist));
     spriteData.css.pipe(gulp.dest(path.stylus));
@@ -202,6 +207,21 @@ gulp.task('minify-js', function() {
         .pipe(gulp.dest(path.js_dist));
 });
 
+// Icon Task
+
+var fontName = "fonticon"
+
+gulp.task('iconfont', function(){
+  gulp.src(path.icons, {base: './dist/fonts'})
+    .pipe(iconfontCss({
+      fontName: fontName,
+      targetPath: '../../../source/stylus/iconfont.styl',
+      fontPath: '../fonts/iconfont/'
+    }))
+    .pipe(iconfont({ fontName: fontName }))
+    .pipe(gulp.dest(path.font_dist + '/iconfont'));
+});
+
 // WATCH
 
 gulp.task('watch', function() {
@@ -222,7 +242,7 @@ gulp.task('sync', function() {
 });
 
 // DEPLOY
-gulp.task('deploy', ['html', 'minify-css', 'minify-js', 'sprite', 'jpg', 'js-lint', 'png']);
+gulp.task('deploy', ['html', 'iconfont', 'minify-css', 'minify-js', 'sprite', 'jpg', 'js-lint', 'png']);
 
 // DEFAULT
-gulp.task('default', ['html', 'css', 'js', 'sprite', 'jpg', 'js-lint', 'png', 'watch', 'sync']);
+gulp.task('default', ['html', 'iconfont', 'css', 'js', 'sprite', 'jpg', 'js-lint', 'png', 'watch', 'sync']);

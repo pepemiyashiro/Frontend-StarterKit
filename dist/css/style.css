@@ -542,6 +542,46 @@ textarea {
   color: #000;
   padding: 0.2em 0;
 }
+@font-face {
+  font-family: "fonticon";
+  src: url("../fonts/iconfont/fonticon.eot");
+  src: url("../fonts/iconfont/fonticon.eot?#iefix") format('eot'), url("../fonts/iconfont/fonticon.woff") format('woff'), url("../fonts/iconfont/fonticon.ttf") format('truetype'), url("../fonts/iconfont/fonticon.svg#fonticon") format('svg');
+}
+.icon:before {
+  font-family: "fonticon";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+/* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
+  text-decoration: none;
+  text-transform: none;
+}
+.icon-accidentes:before {
+  content: "\E001";
+}
+.icon-eps:before {
+  content: "\E002";
+}
+.icon-jubilados:before {
+  content: "\E003";
+}
+.icon-salud:before {
+  content: "\E004";
+}
+.icon-soat:before {
+  content: "\E005";
+}
+.icon-vehicular:before {
+  content: "\E006";
+}
+.icon-viajes:before {
+  content: "\E007";
+}
+.icon-vida:before {
+  content: "\E008";
+}
 body {
   font-size: 14px;
 }
