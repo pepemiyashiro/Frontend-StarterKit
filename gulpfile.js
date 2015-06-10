@@ -41,7 +41,7 @@ var path = {
     // Png
     png: 'source/images/*.png',
     // Fonts
-    icons: 'source/svg/icons/*.svg',
+    icons: 'source/svg/icons/**/*.svg',
     // IMG Source
     img_src: 'source/images',
     // IMG
@@ -215,6 +215,7 @@ gulp.task('iconfont', function(){
   gulp.src(path.icons, {base: './dist/fonts'})
     .pipe(iconfontCss({
       fontName: fontName,
+      path:'source/stylus/template/_icons.css',
       targetPath: '../../../source/stylus/iconfont.styl',
       fontPath: '../fonts/iconfont/'
     }))
@@ -226,6 +227,7 @@ gulp.task('iconfont', function(){
 
 gulp.task('watch', function() {
     gulp.watch(path.jade, ['html']);
+    gulp.watch(path.icons, ['iconfont'], ['css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
     gulp.watch(path.img_src+'/**/*.*', ['sprite', 'jpg' , 'png']);
