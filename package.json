@@ -15,6 +15,7 @@
   "devDependencies": {
     "bower": "^1.4.1",
     "browser-sync": "^2.6.4",
+    "del": "^1.2.0",
     "gulp": "^3.8.11",
     "gulp-changed": "^1.2.1",
     "gulp-clean": "^0.3.1",
