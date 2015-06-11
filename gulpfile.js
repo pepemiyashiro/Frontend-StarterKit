@@ -152,7 +152,7 @@ gulp.task('sprite', function() {
         gulp.src(path.img_src + '/sprite/**/*.*')
         .pipe(changed(path.img_src + '/sprite/**/*.*'))
         .pipe(spritesmith({
-            imgName: 'sprite@2x.png',
+            imgName: 'sprite.png',
             cssName: 'sprite.styl',
             cssFormat: 'stylus',
             algorithm: 'binary-tree',
