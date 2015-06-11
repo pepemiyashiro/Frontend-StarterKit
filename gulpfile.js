@@ -4,13 +4,14 @@
 var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     nib = require('nib'),
+    rupture = require('rupture'),
     jade = require('gulp-jade'),
     browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
-    newer = require('gulp-newer'),
+    changed = require('gulp-changed'),
     imagemin = require('gulp-imagemin'),
     pngmin = require('gulp-pngmin'),
     plumber = require('gulp-plumber'),
@@ -75,7 +76,7 @@ gulp.task('html', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(newer(path.dist))
+        .pipe(changed(path.dist))
         .pipe(jade({
             pretty: true
         }))
@@ -90,9 +91,9 @@ gulp.task('css', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(newer(path.css_dist))
+        .pipe(changed(path.css_dist))
         .pipe(stylus({
-            use: nib(),
+            use: [nib(),rupture()],
             compress: false
         }))
         .pipe(plumber.stop())
@@ -104,9 +105,9 @@ gulp.task('minify-css', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(newer(path.css_dist))
+        .pipe(changed(path.css_dist))
         .pipe(stylus({
-            use: nib(),
+            use: [nib(),rupture()],
             compress: true
         }))
         .pipe(plumber.stop())
@@ -120,7 +121,7 @@ gulp.task('jpg', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(newer(path.img_dist))
+        .pipe(changed(path.img_dist))
         .pipe(imagemin())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.img_dist));
@@ -131,7 +132,7 @@ gulp.task('png', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(newer(path.img_dist))
+        .pipe(changed(path.img_dist))
         .pipe(pngmin())
         .pipe(plumber.stop())
         .pipe(gulp.dest(path.img_dist));
@@ -139,8 +140,8 @@ gulp.task('png', function() {
 
 gulp.task('sprite', function() {
     var spriteData =
-        gulp.src(path.img_src + '/sprite/*.*')
-            .pipe(newer(path.img_src + '/sprite/*.*'))
+        gulp.src(path.img_src + '/sprite/**/*.*')
+            .pipe(changed(path.img_src + '/sprite/**/*.*'))
             .pipe(spritesmith({
                 imgName: 'sprite@2x.png',
                 cssName: 'sprite.styl',
@@ -175,7 +176,7 @@ gulp.task('js', function() {
             path.bower + '/jquery-validation/dist/jquery.validate.min.js',
             path.js + '/*.js'
         ])
-        .pipe(newer(path.js_dist))
+        .pipe(changed(path.js_dist))
         .pipe(concat('main.js'))
         .pipe(gulp.dest(path.js_dist));
     return gulp.src(path.bower + '/modernizr/modernizr.js')
@@ -186,7 +187,7 @@ gulp.task('js-lint', function() {
     gulp.src([
             path.js + '/*.js'
         ])
-        .pipe(newer(path.js_dist))
+        .pipe(changed(path.js_dist))
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
@@ -197,7 +198,7 @@ gulp.task('minify-js', function() {
             path.bower + '/jquery-validation/dist/jquery.validate.min.js',
             path.js + '/*.js'
         ])
-        .pipe(newer(path.js_dist))
+        .pipe(changed(path.js_dist))
         .pipe(uglify())
         .pipe(concat('main.js'))
         .pipe(gulp.dest(path.js_dist));
@@ -213,6 +214,7 @@ var fontName = "fonticon"
 
 gulp.task('iconfont', function(){
   gulp.src(path.icons, {base: './dist/fonts'})
+    .pipe(changed(path.font_dist + '/iconfont'))
     .pipe(iconfontCss({
       fontName: fontName,
       path:'source/stylus/template/_icons.css',

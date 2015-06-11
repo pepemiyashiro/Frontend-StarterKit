@@ -15,6 +15,8 @@ Instalar
 Bower:
 $ npm install -g bower
 
+
+Aplicativos para la compresión de imágenes.
 pngquant:
 https://pngquant.org/ o Instalar desde Brew: 
 $ brew install pngquant
@@ -27,7 +29,7 @@ $ brew install graphicsmagick
 
 **Instalar dependencias de Gulp**
 
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-newer gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith gulp-image-resize gulp-iconfont gulp-iconfont-css
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib rupture browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-changed gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith gulp-image-resize gulp-iconfont gulp-iconfont-css
 
 **Instalar dependencias de Bower**
 
@@ -37,7 +39,7 @@ $ bower install
 
 $ gulp
 
-**Para publicar el proyecto usar:**
+**Para publicar el proyecto de modo comprimido usar:**
 $ gulp deploy
 
 **Para usar una tarea específica**
