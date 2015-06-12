@@ -21,6 +21,9 @@ var gulp = require('gulp'),
     iconfont = require('gulp-iconfont'),
     iconfontCss = require('gulp-iconfont-css'),
     del = require('del'),
+    browserify = require('browserify'),
+    vinylSource = require('vinyl-source-stream'),
+    stylint = require('gulp-stylint'),
     gutil = require('gulp-util');
 
 // ===============
@@ -100,6 +103,7 @@ gulp.task('css', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(stylint())
         .pipe(changed(path.css_dist))
         .pipe(stylus({
             use: [nib(), rupture()],
@@ -114,6 +118,7 @@ gulp.task('minify-css', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(stylint())
         .pipe(changed(path.css_dist))
         .pipe(stylus({
             use: [nib(), rupture()],
@@ -179,7 +184,7 @@ gulp.task('sprite', function() {
 
 // JAVASCRIPT
 
-gulp.task('js', function() {
+gulp.task('js', ['js-lint'], function() {
     gulp.src(jsLibs)
         .pipe(changed(path.js_dist))
         .pipe(concat('main.js'))
@@ -197,7 +202,7 @@ gulp.task('js-lint', function() {
         .pipe(jshint.reporter(stylish));
 });
 
-gulp.task('minify-js', function() {
+gulp.task('minify-js', ['js-lint'], function() {
     gulp.src(jsLibs)
         .pipe(changed(path.js_dist))
         .pipe(uglify())
@@ -236,11 +241,20 @@ gulp.task('clean', function(cb) {
     del(['dist/css', 'dist/js', 'dist/img'], cb)
 });
 
+// TEST Browserify
+
+gulp.task('testb', function(){
+
+    var bundle = browserify('./source/javascript/test.js').bundle();
+
+})
+
+
 // WATCH
 
 gulp.task('watch', function() {
     gulp.watch(path.jade, ['html']);
-    gulp.watch(path.icons, ['iconfont'], ['css'])
+    gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
     gulp.watch(path.img_src + '/**/*.*', ['sprite', 'jpg', 'png']);
@@ -257,7 +271,7 @@ gulp.task('sync', function() {
 });
 
 // DEPLOY
-gulp.task('deploy', ['html', 'iconfont', 'minify-css', 'minify-js', 'sprite', 'jpg', 'js-lint', 'png']);
+gulp.task('deploy', ['html', 'jpg', 'png', 'iconfont', 'sprite', 'minify-css', 'minify-js']);
 
 // DEFAULT
-gulp.task('default', ['html', 'iconfont', 'css', 'js', 'sprite', 'jpg', 'js-lint', 'png', 'watch', 'sync']);
+gulp.task('default', ['html', 'jpg', 'png', 'iconfont', 'sprite', 'css', 'js', 'watch', 'sync']);

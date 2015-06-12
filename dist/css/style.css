@@ -1869,21 +1869,21 @@ body {
   font-size: 14px;
 }
 .icon-home {
-  background-image: url("../img/sprite@2x.png");
+  background-image: url("../img/sprite.png");
   background-size: 28px;
   background-position: 0px -14px;
   width: 14px;
   height: 14px;
 }
 .icon-hello {
-  background-image: url("../img/sprite@2x.png");
+  background-image: url("../img/sprite.png");
   background-size: 28px;
   background-position: -14px 0px;
   width: 14px;
   height: 14px;
 }
 .icon-love {
-  background-image: url("../img/sprite@2x.png");
+  background-image: url("../img/sprite.png");
   background-size: 28px;
   background-position: -14px -14px;
   width: 14px;
