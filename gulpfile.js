@@ -35,7 +35,7 @@ var path = {
     // Bower
     bower: 'bower_components',
     // Jade to HTML
-    jade: 'source/jade/*.jade',
+    jade: 'source/jade',
     // Stylus to CSS
     stylus: 'source/stylus',
     // Javascript
@@ -84,7 +84,7 @@ var onError = function(err) {
 // JADE - HTML
 
 gulp.task('html', function() {
-    return gulp.src(path.jade)
+    return gulp.src(path.jade+'/*.jade')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -176,7 +176,7 @@ gulp.task('sprite', function() {
             sharpen: true
         }))
         .pipe(rename(function(path) {
-            path.basename = "sprite";
+            path.basename = "sprite@2x";
         }))
         .pipe(gulp.dest(path.img_dist));
     spriteData.css.pipe(gulp.dest(path.stylus));
@@ -253,7 +253,7 @@ gulp.task('testb', function(){
 // WATCH
 
 gulp.task('watch', function() {
-    gulp.watch(path.jade, ['html']);
+    gulp.watch(path.jade+'/**/*.jade', ['html']);
     gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
@@ -271,7 +271,7 @@ gulp.task('sync', function() {
 });
 
 // DEPLOY
-gulp.task('deploy', ['html', 'jpg', 'png', 'iconfont', 'sprite', 'minify-css', 'minify-js']);
+gulp.task('deploy', ['html', 'sprite', 'jpg', 'png', 'iconfont', 'minify-css', 'minify-js']);
 
 // DEFAULT
-gulp.task('default', ['html', 'jpg', 'png', 'iconfont', 'sprite', 'css', 'js', 'watch', 'sync']);
+gulp.task('default', ['html', 'sprite', 'jpg', 'png', 'iconfont', 'css', 'js', 'watch', 'sync']);
