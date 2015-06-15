@@ -174,9 +174,6 @@ gulp.task('sprite', function() {
 // JAVASCRIPT
 
 gulp.task('js', function() {
-    gulp.src(path.bower + '/modernizr/modernizr.js')
-        .pipe(gulp.dest(path.js_dist));
-
     return browserify(path.js + '/main.js')
                 .bundle()
                 .pipe(plumber({
@@ -190,9 +187,6 @@ gulp.task('js', function() {
 });
 
 gulp.task('minify-js', function() {
-    gulp.src(path.bower + '/modernizr/modernizr.js')
-        .pipe(gulp.dest(path.js_dist))
-        .pipe(uglify());
     return browserify(path.js + '/main.js')
                 .bundle()
                 .pipe(plumber({

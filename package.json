@@ -13,7 +13,6 @@
   "author": "Pepe Miyashiro",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^2.1.4",
     "browser-sync": "^2.6.4",
     "browserify": "^10.2.4",
     "del": "^1.2.0",
@@ -35,6 +34,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
     "gulp.spritesmith": "^3.5.4",
+    "jquery": "^2.1.4",
     "jshint-stylish": "^1.0.1",
     "nib": "^1.1.0",
     "rupture": "^0.6.1",
