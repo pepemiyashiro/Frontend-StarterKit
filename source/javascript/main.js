@@ -1,18 +1,7 @@
-/*
-** Aunt Poison and the Alien Mindbenders
-*/
+/**	
+ * Ejemplo para invokar un módulo
+ * @type {broserify}
+ */
+var example = require('./example');
 
-Main = (function($) {
-
-    var test = "soy test";
-
-    return {
-        // Demo
-        demo: function() {
-            console.log(test);
-        }
-    };
-
-})(jQuery);
-
-Main.demo();
+example.log('This is an Exmaple');

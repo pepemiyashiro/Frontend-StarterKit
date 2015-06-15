@@ -22,7 +22,7 @@ var gulp = require('gulp'),
     iconfontCss = require('gulp-iconfont-css'),
     del = require('del'),
     browserify = require('browserify'),
-    vinylSource = require('vinyl-source-stream'),
+    source = require('vinyl-source-stream'),
     stylint = require('gulp-stylint'),
     gutil = require('gulp-util');
 
@@ -56,15 +56,6 @@ var path = {
     js_dist: 'dist/js',
     font_dist: 'dist/fonts'
 };
-
-// Config
-
-//
-jsLibs = [
-    path.bower + '/jquery/dist/jquery.min.js',
-    path.bower + '/jquery-validation/dist/jquery.validate.min.js',
-    path.js + '/*.js'
-]
 
 // ===============
 // Error Handler
@@ -184,34 +175,37 @@ gulp.task('sprite', function() {
 
 // JAVASCRIPT
 
-gulp.task('js', ['js-lint'], function() {
-    gulp.src(jsLibs)
-        .pipe(changed(path.js_dist))
-        .pipe(concat('main.js'))
+gulp.task('js', function() {
+    gulp.src(path.bower + '/modernizr/modernizr.js')
         .pipe(gulp.dest(path.js_dist));
-    return gulp.src(path.bower + '/modernizr/modernizr.js')
-        .pipe(gulp.dest(path.js_dist));
+
+    return browserify(path.js + '/main.js')
+                .bundle()
+                .pipe(plumber({
+                    errorHandler: onError
+                }))
+                .pipe(source('main.js'))
+                .pipe(jshint())
+                .pipe(jshint.reporter(stylish))
+                .pipe(plumber.stop())
+                .pipe(gulp.dest(path.js_dist));
 });
 
-gulp.task('js-lint', function() {
-    gulp.src([
-            path.js + '/*.js'
-        ])
-        .pipe(changed(path.js_dist))
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish));
-});
-
-gulp.task('minify-js', ['js-lint'], function() {
-    gulp.src(jsLibs)
-        .pipe(changed(path.js_dist))
-        .pipe(uglify())
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest(path.js_dist));
-
-    return gulp.src(path.bower + '/modernizr/modernizr.js')
-        .pipe(uglify())
-        .pipe(gulp.dest(path.js_dist));
+gulp.task('minify-js', function() {
+    gulp.src(path.bower + '/modernizr/modernizr.js')
+        .pipe(gulp.dest(path.js_dist))
+        .pipe(uglify());
+    return browserify(path.js + '/main.js')
+                .bundle()
+                .pipe(plumber({
+                    errorHandler: onError
+                }))
+                .pipe(source('main.js'))
+                .pipe(jshint())
+                .pipe(jshint.reporter(stylish))
+                .pipe(uglify())
+                .pipe(plumber.stop())
+                .pipe(gulp.dest(path.js_dist));
 });
 
 // Icon Task
@@ -240,14 +234,6 @@ gulp.task('clean', function(cb) {
     console.log('Cleaning files ...');
     del(['dist/css', 'dist/js', 'dist/img'], cb)
 });
-
-// TEST Browserify
-
-gulp.task('testb', function(){
-
-    var bundle = browserify('./source/javascript/test.js').bundle();
-
-})
 
 
 // WATCH
