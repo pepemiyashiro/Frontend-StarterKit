@@ -10,11 +10,6 @@ $ npm init
 
 **Instalar aplicaciones para OSX**
 
-Instalar 
-
-Bower:
-$ npm install -g bower
-
 
 Aplicativos para la compresión de imágenes.
 pngquant:
@@ -29,11 +24,11 @@ $ brew install graphicsmagick
 
 **Instalar dependencias de Gulp**
 
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib rupture browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-changed gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith gulp-image-resize gulp-iconfont gulp-iconfont-css del gulp-rename browserify gulp-csslint
+$ npm install --save-dev gulp gulp-jade gulp-stylus nib rupture browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-changed gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith gulp-image-resize gulp-iconfont gulp-iconfont-css del gulp-rename browserify gulp-stylint vinyl-source-stream
 
-**Instalar dependencias de Bower**
+**Instalar dependencias de Browserify**
 
-$ bower install
+$ npm install LaDependencia
 
 **Para trabajar, syncronizar y actualizar los cambios en el browser usar:**
 
@@ -58,6 +53,7 @@ Para facilitar el uso hay que utilizar los mixins en mixin.styl, utilizando el m
 
 Importante: Los sprites cogeran el nombre del estilo según el nombre del mismo archivo agregandol un prefijo (spr).
 
+**Media Queries con Rupture:**
 
 ## Editar el source/jade/template/-config.jade ##
 **Para configurar las variables del JADE**
