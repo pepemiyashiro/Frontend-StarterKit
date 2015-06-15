@@ -32,8 +32,6 @@ var gulp = require('gulp'),
 
 
 var path = {
-    // Bower
-    bower: 'bower_components',
     // Jade to HTML
     jade: 'source/jade',
     // Stylus to CSS
