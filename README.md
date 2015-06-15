@@ -1,8 +1,8 @@
 # Web Starter #
 
-**Instalar Gulp:**
+**Instalar Dependencias:**
 
-$ npm install -g gulp
+$ npm install
 
 **Iniciar el proyecto, ejecutar:**
 
@@ -22,9 +22,6 @@ $ brew install imagemagick
 Graphics Magik
 $ brew install graphicsmagick
 
-**Instalar dependencias de Gulp**
-
-$ npm install --save-dev gulp gulp-jade gulp-stylus nib rupture browser-sync gulp-imagemin gulp-concat gulp-uglify jshint-stylish gulp-jshint gulp-changed gulp-pngmin bower gulp-util gulp-plumber gulp.spritesmith gulp-image-resize gulp-iconfont gulp-iconfont-css del gulp-rename browserify gulp-stylint vinyl-source-stream
 
 **Instalar dependencias de Browserify**
 
