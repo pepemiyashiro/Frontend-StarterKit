@@ -7,8 +7,6 @@ Aplicativos para la compresión de imágenes.
 **pngquant**:
 
 ```
-#!bash
-
 $ brew install pngquant
 ```
 
@@ -16,17 +14,12 @@ $ brew install pngquant
 **Imagemagik:**
 
 ```
-#!bash
-
 $ brew install imagemagick
-
 ```
 
 **Graphics Magik**
 
 ```
-#!bash
-
 $ brew install graphicsmagick
 ```
 
@@ -35,8 +28,6 @@ $ brew install graphicsmagick
 
 
 ```
-#!node
-
 $ npm install
 ```
 
@@ -45,8 +36,6 @@ $ npm install
 
 
 ```
-#!node
-
 $ npm init
 ```
 
@@ -55,8 +44,6 @@ $ npm init
 
 
 ```
-#!node
-
 $ gulp
 ```
 
@@ -64,8 +51,6 @@ $ gulp
 **Para publicar el proyecto de modo comprimido usar:**
 
 ```
-#!node
-
 $ gulp deploy
 ```
 
@@ -74,8 +59,6 @@ $ gulp deploy
 
 
 ```
-#!node
-
 $ gulp NombreDelTask 
 ```
 
@@ -88,18 +71,13 @@ $ gulp NombreDelTask
 
 
 ```
-#!bash
-
 source/image/sprite
-
 ```
 
 Para utilizarlos hay que utilizar el Mixin dentro de la clase que cargará el sprite, de la siguiente manera:
 
 
 ```
-#!stylus
-
 sprite(spr-nombreDelArchivo)
 ```
 
@@ -123,16 +101,12 @@ Hay íconos pre-cargados de FontAwesome. Dentro de la carpeta:
 
 
 ```
-#!bash
-
 source/svg/icons
 ```
 
 Solo se necesita agregar la clase de la siguiente manera en JADE:
 
 ```
-#!jade
-
 .icof-elNombreDelIcono 
 ```
 
@@ -147,7 +121,5 @@ Para agregar iconos nuevos, solo se deben agregar dentro de una carpeta para pod
 **Editar el source/jade/template/-config.jade**
 
 ```
-#!jade
-
 jade/-config.jade
 ```
