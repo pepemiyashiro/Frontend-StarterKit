@@ -168,7 +168,7 @@ gulp.task('js', function() {
         .bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
-        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init({loadMaps:true}))
         .pipe(plumber({
             errorHandler: onError
         }))
