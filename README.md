@@ -1,17 +1,9 @@
 # Web Starter #
 
-**Instalar Dependencias:**
-
-$ npm install
-
-**Iniciar el proyecto, ejecutar:**
-
-$ npm init
-
 **Instalar aplicaciones para OSX**
 
-
 Aplicativos para la compresión de imágenes.
+
 pngquant:
 https://pngquant.org/ o Instalar desde Brew: 
 $ brew install pngquant
@@ -22,10 +14,14 @@ $ brew install imagemagick
 Graphics Magik
 $ brew install graphicsmagick
 
+**Instalar Dependencias:**
 
-**Instalar dependencias de Browserify**
+$ npm install
 
-$ npm install LaDependencia
+**Iniciar el proyecto, ejecutar:**
+
+$ npm init
+
 
 **Para trabajar, syncronizar y actualizar los cambios en el browser usar:**
 
@@ -51,6 +47,8 @@ Para facilitar el uso hay que utilizar los mixins en mixin.styl, utilizando el m
 Importante: Los sprites cogeran el nombre del estilo según el nombre del mismo archivo agregandol un prefijo (spr).
 
 **Media Queries con Rupture:**
+
+**Creación automatizada de iconFonts:**
 
 ## Editar el source/jade/template/-config.jade ##
 **Para configurar las variables del JADE**

@@ -3,8 +3,8 @@
  * @type {broserify}
  */
 
-var example = require('./example');
-var jquerySaludo = require('./jquery-saludo');
+var example = require('./examples/example');
+var jquerySaludo = require('./examples/jquery-saludo');
 
 jquerySaludo.init();
 

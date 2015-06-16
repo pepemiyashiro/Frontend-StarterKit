@@ -174,11 +174,13 @@ gulp.task('sprite', function() {
 // JAVASCRIPT
 
 gulp.task('js', function() {
-    return browserify(path.js + '/main.js', {
-            debug: true
-        })
+    return browserify(path.js + '/main.js')
         .bundle()
         .pipe(source('main.js'))
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(plumber.stop())
         .pipe(gulp.dest(path.js_dist));
 });
 
@@ -187,6 +189,10 @@ gulp.task('minify-js', function() {
         .bundle()
         .pipe(source('main.js'))
         .pipe(uglify())
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(plumber.stop())
         .pipe(gulp.dest(path.js_dist));
 });
 
@@ -195,12 +201,13 @@ gulp.task('minify-js', function() {
 
 gulp.task('js-hint', function() {
     return gulp.src(path.js + '/**/*.js')
-                .pipe(plumber({
-                    errorHandler: onError
-                }))
-                .pipe(jshint())
-                .pipe(jshint.reporter(stylish))
-                .pipe(plumber.stop());
+        .pipe(changed(path.js + '/**/*.js'))
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(jshint())
+        .pipe(jshint.reporter(stylish))
+        .pipe(plumber.stop());
 });
 
 // Icon Task
