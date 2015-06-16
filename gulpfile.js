@@ -193,9 +193,9 @@ gulp.task('minify-js', function() {
                     errorHandler: onError
                 }))
                 .pipe(source('main.js'))
+                .pipe(uglify())
                 .pipe(jshint())
                 .pipe(jshint.reporter(stylish))
-                .pipe(uglify())
                 .pipe(plumber.stop())
                 .pipe(gulp.dest(path.js_dist));
 });

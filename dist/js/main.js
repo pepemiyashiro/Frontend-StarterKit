@@ -9211,21 +9211,37 @@ return jQuery;
 }));
 
 },{}],2:[function(require,module,exports){
+function log(string) {
+    if (console) console.log(string);
+}
+
+
 module.exports = {
-	log: function  (string) {
-		if (console) console.log(string);
-	}
+    log: log
 };
 
 },{}],3:[function(require,module,exports){
+var $ = require('jquery');
+
+function init () {
+	$('body').prepend('<h1> Este es el módulo jquery saludo </h1>');
+}
+
+
+module.exports = {
+	init:init
+};
+},{"jquery":1}],4:[function(require,module,exports){
 /**	
  * Ejemplo para invocar un módulo
  * @type {broserify}
  */
 
-var $ = require('jquery');
 var example = require('./example');
+var jquerySaludo = require('./jquery-saludo');
 
-$('body').prepend("<h1>Auntpoison Boilerplate</h1>");
+jquerySaludo.init();
+
+
 example.log('This is an Exmaple');
-},{"./example":2,"jquery":1}]},{},[3]);
+},{"./example":2,"./jquery-saludo":3}]},{},[4]);

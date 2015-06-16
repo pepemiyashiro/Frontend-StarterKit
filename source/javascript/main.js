@@ -3,8 +3,10 @@
  * @type {broserify}
  */
 
-var $ = require('jquery');
 var example = require('./example');
+var jquerySaludo = require('./jquery-saludo');
 
-$('body').prepend("<h1>Auntpoison Boilerplate</h1>");
+jquerySaludo.init();
+
+
 example.log('This is an Exmaple');
