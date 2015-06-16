@@ -39,6 +39,9 @@ $ gulp NombreDelTask (revisar gulpfile.js)
 Se deben colocar las imágenes que serán sprites en la carpeta:
 source/image/sprite
 
+Para utilizarlos hay que utilizar el Mixin dentro de la clase que cargará el sprite, de la siguiente manera:
+sprite(spr-nombreDelArchivo)
+
 El task "sprite" genera los estilos de forma automatizada (sprite.styl) que se importa en el style.styl
 el archivo en la raiz: stylus.template.mustache.
 Se utiliza para generar los estilos del sprite.
@@ -49,6 +52,13 @@ Importante: Los sprites cogeran el nombre del estilo según el nombre del mismo 
 **Media Queries con Rupture:**
 
 **Creación automatizada de iconFonts:**
+Los íconos son los de FontAwesome.
+Solo se necesita agregar la clase de la siguiente manera:
+
+.icof-elNombreDelIcono 
+
+
+[Buscador de íconos](http://fortawesome.github.io/Font-Awesome/icons/)
 
 ## Editar el source/jade/template/-config.jade ##
 **Para configurar las variables del JADE**
