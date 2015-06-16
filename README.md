@@ -143,7 +143,7 @@ Solo se necesita agregar la clase de la siguiente manera en JADE:
 Para agregar iconos nuevos, solo se deben agregar dentro de una carpeta para poder ordenarlos.
 
 ## **HTML/JADE** ##
-**Para configurar las variables del JADE**
+**Para configurar las variables del JADE, de descipción, código de analitycs y otros metas.**
 **Editar el source/jade/template/-config.jade**
 
 ```
