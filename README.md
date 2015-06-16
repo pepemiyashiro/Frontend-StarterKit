@@ -10,7 +10,7 @@ Instalar desde Brew:
 ```
 #!bash
 
-*$ brew install pngquant*
+$ brew install pngquant
 ```
 
 
@@ -19,7 +19,7 @@ Instalar desde Brew:
 ```
 #!bash
 
-*$ brew install imagemagick*
+$ brew install imagemagick
 
 ```
 
