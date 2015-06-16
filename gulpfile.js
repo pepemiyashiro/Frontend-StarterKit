@@ -24,6 +24,8 @@ var gulp = require('gulp'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
     stylint = require('gulp-stylint'),
+    buffer = require('vinyl-buffer'),
+    sourcemaps = require('gulp-sourcemaps'),
     gutil = require('gulp-util');
 
 // ===============
@@ -89,21 +91,7 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
     return gulp.src(path.stylus + '/style.styl')
-        .pipe(plumber({
-            errorHandler: onError
-        }))
-        .pipe(stylint())
-        .pipe(changed(path.css_dist))
-        .pipe(stylus({
-            use: [nib(), rupture()],
-            compress: false
-        }))
-        .pipe(plumber.stop())
-        .pipe(gulp.dest(path.css_dist));
-});
-
-gulp.task('minify-css', function() {
-    return gulp.src(path.stylus + '/style.styl')
+        .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -114,6 +102,7 @@ gulp.task('minify-css', function() {
             compress: true
         }))
         .pipe(plumber.stop())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(path.css_dist));
 });
 
@@ -174,25 +163,18 @@ gulp.task('sprite', function() {
 // JAVASCRIPT
 
 gulp.task('js', function() {
-    return browserify(path.js + '/main.js')
-        .bundle()
-        .pipe(source('main.js'))
-        .pipe(plumber({
-            errorHandler: onError
-        }))
-        .pipe(plumber.stop())
-        .pipe(gulp.dest(path.js_dist));
-});
 
-gulp.task('minify-js', function() {
     return browserify(path.js + '/main.js')
         .bundle()
         .pipe(source('main.js'))
-        .pipe(uglify())
+        .pipe(buffer())
+        .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
         }))
+        .pipe(uglify())
         .pipe(plumber.stop())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(path.js_dist));
 });
 
@@ -257,9 +239,6 @@ gulp.task('sync', function() {
         }
     });
 });
-
-// DEPLOY
-gulp.task('deploy', ['html', 'sprite', 'jpg', 'png', 'iconfont', 'minify-css', 'minify-js']);
 
 // DEFAULT
 gulp.task('default', ['html', 'sprite', 'jpg', 'png', 'iconfont', 'css', 'js', 'watch', 'sync']);
