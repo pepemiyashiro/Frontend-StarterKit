@@ -1,22 +1,46 @@
 # Web Starter #
 
-**Instalar aplicaciones para OSX**
+## Instalar aplicaciones para OSX ##
 
 Aplicativos para la compresión de imágenes.
 
-pngquant:
-https://pngquant.org/ o Instalar desde Brew: 
-$ brew install pngquant
+**pngquant**:
+Instalar desde Brew: 
 
-Imagemagik:
-$ brew install imagemagick
+```
+#!bash
 
-Graphics Magik
+*$ brew install pngquant*
+```
+
+
+**Imagemagik:**
+
+```
+#!bash
+
+*$ brew install imagemagick*
+
+```
+
+**Graphics Magik**
+
+```
+#!bash
+
 $ brew install graphicsmagick
+```
 
-**Instalar Dependencias:**
+
+## Instalar Dependencias: ##
+
+
+```
+#!node
 
 $ npm install
+```
+
 
 **Iniciar el proyecto, ejecutar:**
 
