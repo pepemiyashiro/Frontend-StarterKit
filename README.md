@@ -1,4 +1,4 @@
-**# Web Starter #**
+# **Web Starter** #
 
 ## Instalar aplicaciones para OSX ##
 
