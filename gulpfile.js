@@ -73,7 +73,7 @@ var onError = function(err) {
 // JADE - HTML
 
 gulp.task('html', function() {
-    return gulp.src(path.jade+'/*.jade')
+    return gulp.src(path.jade + '/*.jade')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -174,30 +174,33 @@ gulp.task('sprite', function() {
 // JAVASCRIPT
 
 gulp.task('js', function() {
-    return browserify(path.js + '/main.js')
-                .bundle()
-                .pipe(plumber({
-                    errorHandler: onError
-                }))
-                .pipe(source('main.js'))
-                .pipe(jshint())
-                .pipe(jshint.reporter(stylish))
-                .pipe(plumber.stop())
-                .pipe(gulp.dest(path.js_dist));
+    return browserify(path.js + '/main.js', {
+            debug: true
+        })
+        .bundle()
+        .pipe(source('main.js'))
+        .pipe(gulp.dest(path.js_dist));
 });
 
 gulp.task('minify-js', function() {
     return browserify(path.js + '/main.js')
-                .bundle()
+        .bundle()
+        .pipe(source('main.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.js_dist));
+});
+
+
+// JS Hint
+
+gulp.task('js-hint', function() {
+    return gulp.src(path.js + '/**/*.js')
                 .pipe(plumber({
                     errorHandler: onError
                 }))
-                .pipe(source('main.js'))
-                .pipe(uglify())
                 .pipe(jshint())
                 .pipe(jshint.reporter(stylish))
-                .pipe(plumber.stop())
-                .pipe(gulp.dest(path.js_dist));
+                .pipe(plumber.stop());
 });
 
 // Icon Task
@@ -231,10 +234,10 @@ gulp.task('clean', function(cb) {
 // WATCH
 
 gulp.task('watch', function() {
-    gulp.watch(path.jade+'/**/*.jade', ['html']);
+    gulp.watch(path.jade + '/**/*.jade', ['html']);
     gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
-    gulp.watch(path.js + '/**/*.js', ['js']);
+    gulp.watch(path.js + '/**/*.js', ['js', 'js-hint']);
     gulp.watch(path.img_src + '/**/*.*', ['sprite', 'jpg', 'png']);
 });
 
