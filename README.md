@@ -5,7 +5,6 @@
 Aplicativos para la compresión de imágenes.
 
 **pngquant**:
-Instalar desde Brew: 
 
 ```
 #!bash
@@ -32,7 +31,7 @@ $ brew install graphicsmagick
 ```
 
 
-## Instalar Dependencias: ##
+## **Instalar Dependencias** ##
 
 
 ```
@@ -42,7 +41,7 @@ $ npm install
 ```
 
 
-## Inicializar el proyecto ##
+## **Inicializar el proyecto** ##
 
 
 ```
@@ -52,7 +51,7 @@ $ npm init
 ```
 
 
-## Trabajar, syncronizar y actualizar los cambios en el browser ##
+## **Trabajar, syncronizar y actualizar los cambios en el browser** ##
 
 
 ```
@@ -83,7 +82,7 @@ $ gulp NombreDelTask
 
 (revisar gulpfile.js)
 
-## Creación automatizada de sprites: ##
+## **Creación automatizada de sprites:** ##
 
 **Se deben colocar solo las imágenes que serán sprites en la carpeta:**
 
@@ -111,13 +110,13 @@ Se utiliza para generar los estilos del sprite.
 Para facilitar el uso hay que utilizar los mixins en mixin.styl, utilizando el mixin: sprite($sprite) ($sprite será el nombre del sprite generado de forma automatizada en sprite.styl).
 
 
-## Media Queries con Rupture ##
+## **Media Queries con Rupture** ##
 
 Revisar documentación:
 
 [Rupture](https://github.com/jenius/rupture)
 
-## IconFonts ##
+## **IconFonts** ##
 
 **Íconos de FontAwesome**
 Hay íconos pre-cargados de FontAwesome. Dentro de la carpeta:
@@ -143,7 +142,7 @@ Solo se necesita agregar la clase de la siguiente manera en JADE:
 
 Para agregar iconos nuevos, solo se deben agregar dentro de una carpeta para poder ordenarlos.
 
-## HTML ##
+## **HTML/JADE** ##
 **Para configurar las variables del JADE**
 **Editar el source/jade/template/-config.jade**
 
