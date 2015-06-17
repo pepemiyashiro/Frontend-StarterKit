@@ -26,7 +26,6 @@ var gulp = require('gulp'),
     stylint = require('gulp-stylint'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    fluidity = require('fluidity'),
     gutil = require('gulp-util');
 
 // ===============
@@ -93,7 +92,7 @@ gulp.task('html', function() {
 
 gulp.task('css', function() {
     
-    gulp.src(path.stylus + '/style.styl')
+    gulp.src(path.stylus + '/main.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
@@ -101,8 +100,11 @@ gulp.task('css', function() {
         .pipe(stylint())
         .pipe(changed(path.css_dist))
         .pipe(stylus({
-            use: [fluidity(), rupture()],
-            compress: false
+            use: [nib(), rupture()],
+            compress: true
+        }))
+        .pipe(rename({
+            basename: 'style'
         }))
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))

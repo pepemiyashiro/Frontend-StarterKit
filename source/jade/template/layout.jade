@@ -9,13 +9,12 @@ include -doctype
 		| to improve your experience.
 		<![endif]-->
 		
+		include -header.jade
+		
 		#wrapper
 			
-			include -header.jade
-
 			block content
-
-			include -footer.jade
-			
+	
 		// END of #wrapper
 		
+		include -footer.jade
