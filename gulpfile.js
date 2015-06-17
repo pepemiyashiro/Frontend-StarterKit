@@ -169,7 +169,7 @@ gulp.task('sprite', function() {
 
 // JAVASCRIPT
 
-gulp.task('js', function() {
+gulp.task('js', ['js-hint'], function() {
     
     browserify(path.js + '/main.js')
         .bundle()
@@ -251,4 +251,4 @@ gulp.task('sync', function() {
 
 // DEFAULT
 gulp.task('default', ['html', 'css', 'js', 'watch', 'sync']);
-gulp.task('minify', ['jpg', 'png', 'css']);
+gulp.task('optimize', ['jpg', 'png', 'css']);
