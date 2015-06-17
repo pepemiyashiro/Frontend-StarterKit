@@ -42,18 +42,25 @@ $ npm init
 
 ## **Trabajar, syncronizar y actualizar los cambios en el browser** ##
 
-
+** Para Sincronizar HTML, CSS y JS:**
 ```
 $ gulp
 ```
 
-
-**Para publicar el proyecto de modo comprimido usar:**
-
+**Para optimizar imágenes:**
 ```
-$ gulp deploy
+$ gulp optimize
 ```
 
+**Para crear sprite:**
+```
+$ gulp sprite
+```
+
+**Para convertir los SVG a Fuentes:**
+```
+$ gulp iconfont
+```
 
 **Para usar una tarea específica**
 
