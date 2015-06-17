@@ -26,6 +26,7 @@ var gulp = require('gulp'),
     stylint = require('gulp-stylint'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
+    fluidity = require('fluidity'),
     gutil = require('gulp-util');
 
 // ===============
@@ -75,7 +76,8 @@ var onError = function(err) {
 // JADE - HTML
 
 gulp.task('html', function() {
-    return gulp.src(path.jade + '/*.jade')
+    
+    gulp.src(path.jade + '/*.jade')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -90,7 +92,8 @@ gulp.task('html', function() {
 // STYLUS - CSS
 
 gulp.task('css', function() {
-    return gulp.src(path.stylus + '/style.styl')
+    
+    gulp.src(path.stylus + '/style.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
@@ -98,8 +101,8 @@ gulp.task('css', function() {
         .pipe(stylint())
         .pipe(changed(path.css_dist))
         .pipe(stylus({
-            use: [nib(), rupture()],
-            compress: true
+            use: [fluidity(), rupture()],
+            compress: false
         }))
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))
@@ -109,6 +112,7 @@ gulp.task('css', function() {
 // IMAGES
 
 gulp.task('jpg', function() {
+    
     return gulp.src(path.jpg)
         .pipe(plumber({
             errorHandler: onError
@@ -120,6 +124,7 @@ gulp.task('jpg', function() {
 });
 
 gulp.task('png', function() {
+    
     return gulp.src(path.png)
         .pipe(plumber({
             errorHandler: onError
@@ -131,12 +136,14 @@ gulp.task('png', function() {
 });
 
 gulp.task('sprite', function() {
+    
     var spriteData =
         gulp.src(path.img_src + '/sprite/**/*.*')
         .pipe(changed(path.img_src + '/sprite/**/*.*'))
         .pipe(spritesmith({
             imgName: 'sprite.png',
-            cssName: 'sprite.styl',
+            cssName: 'inc/sprite.styl',
+            imgPath: 'sprite.png',
             cssFormat: 'stylus',
             algorithm: 'binary-tree',
             cssTemplate: path.stylus + '/template/stylus.template.mustache',
@@ -163,8 +170,8 @@ gulp.task('sprite', function() {
 // JAVASCRIPT
 
 gulp.task('js', function() {
-
-    return browserify(path.js + '/main.js')
+    
+    browserify(path.js + '/main.js')
         .bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
@@ -182,6 +189,7 @@ gulp.task('js', function() {
 // JS Hint
 
 gulp.task('js-hint', function() {
+    
     return gulp.src(path.js + '/**/*.js')
         .pipe(changed(path.js + '/**/*.js'))
         .pipe(plumber({
@@ -197,20 +205,21 @@ gulp.task('js-hint', function() {
 var fontName = "fonticon"
 
 gulp.task('iconfont', function() {
-    gulp.src(path.icons, {
+    
+    return gulp.src(path.icons, {
             base: './dist/fonts'
-        })
-        .pipe(changed(path.font_dist + '/iconfont'))
-        .pipe(iconfontCss({
-            fontName: fontName,
-            path: 'source/stylus/template/_icons.css',
-            targetPath: '../../../source/stylus/iconfont.styl',
-            fontPath: '../fonts/iconfont/'
-        }))
-        .pipe(iconfont({
-            fontName: fontName
-        }))
-        .pipe(gulp.dest(path.font_dist + '/iconfont'));
+            })
+            .pipe(changed(path.font_dist + '/iconfont'))
+            .pipe(iconfontCss({
+                fontName: fontName,
+                path: 'source/stylus/template/_icons.css',
+                targetPath: '../../../source/stylus/inc/iconfont.styl',
+                fontPath: '../fonts/iconfont/'
+            }))
+            .pipe(iconfont({
+                fontName: fontName
+            }))
+            .pipe(gulp.dest(path.font_dist + '/iconfont'));
 });
 
 // Clean
@@ -223,11 +232,11 @@ gulp.task('clean', function(cb) {
 // WATCH
 
 gulp.task('watch', function() {
+    
     gulp.watch(path.jade + '/**/*.jade', ['html']);
     gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js', 'js-hint']);
-    gulp.watch(path.img_src + '/**/*.*', ['sprite', 'jpg', 'png']);
 });
 
 // BROWSER SYNC
@@ -241,4 +250,5 @@ gulp.task('sync', function() {
 });
 
 // DEFAULT
-gulp.task('default', ['html', 'sprite', 'jpg', 'png', 'iconfont', 'css', 'js', 'watch', 'sync']);
+gulp.task('default', ['html', 'css', 'js', 'watch', 'sync']);
+gulp.task('minify', ['jpg', 'png', 'css']);

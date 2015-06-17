@@ -1,13 +1,27 @@
-@import "libs/normalize"
-@import "sprite"
-@import "mixins"
-@import "iconfont"
-@import "general"
+@import "inc/libs/normalize"
+@import "inc/sprite"
+@import "inc/mixins"
+@import "inc/iconfont"
+@import "inc/general"
 
 
-fontsize = 14px
+
+
+
+// Rupture Config
 rupture.scale = 0 400px 600px 800px 1050px 1800px
 rupture.scale-names = 'xs' 's' 'm' 'l' 'xl' 'hd'
+
+// Fluidity Config
+
+// grid-width = 100%
+// grid-min-width = 320px
+// base-font-size = 1em
+// base-line-height = 1.25em
+// base-color = #000000
+// vendors = webkit moz o official
+
+fontsize = 14px
 
 body
 	font-size: fontsize
@@ -21,6 +35,9 @@ body
 .icon-love
 	sprite(spr-love)
 
+.icon-email
+	sprite(spr-email)
+
 
 .font-icons
 	background: red
@@ -29,5 +46,5 @@ body
 	+from-width('s')
 		background:blue
 
-@import "libs/helpers"
-@import "print"
+@import "inc/libs/helpers"
+@import "inc/print"
