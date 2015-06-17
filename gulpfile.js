@@ -236,7 +236,7 @@ gulp.task('watch', function() {
     gulp.watch(path.jade + '/**/*.jade', ['html']);
     gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
-    gulp.watch(path.js + '/**/*.js', ['js', 'js-hint']);
+    gulp.watch(path.js + '/**/*.js', ['js']);
 });
 
 // BROWSER SYNC

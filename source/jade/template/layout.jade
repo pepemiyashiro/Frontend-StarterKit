@@ -1,15 +1,21 @@
-include -config.jade
-include -doctype.jade
-	include -head.jade
+include -doctype
+	head
+		include -head
 	body
-		// if lt IE 8
-				<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		include -header.jade
+		<!--[if lt IE 8]>
+		p.browsehappy
+		| You are using an <strong>outdated</strong> browser.
+		| Please <a href="http://browsehappy.com/">upgrade your browser</a>
+		| to improve your experience.
+		<![endif]-->
 		
 		#wrapper
+			
+			include -header.jade
 
 			block content
 
+			include -footer.jade
+			
 		// END of #wrapper
 		
-		include -footer.jade
