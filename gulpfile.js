@@ -1,6 +1,6 @@
-// ===============
+// ===========================================================================
 // Dependencies
-// ===============
+// ===========================================================================
 var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     nib = require('nib'),
@@ -28,11 +28,10 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     gutil = require('gulp-util');
 
-// ===============
-// Paths
-// ===============
 
-
+// ===========================================================================
+// Paths URL
+// ===========================================================================
 var path = {
     // Jade to HTML
     jade: 'source/jade',
@@ -57,26 +56,28 @@ var path = {
     font_dist: 'dist/fonts'
 };
 
-// ===============
+
+
+// ===========================================================================
 // Error Handler
-// ===============
-
-
+// ===========================================================================
 var onError = function(err) {
     gutil.beep();
     console.log(err);
 };
 
 
-// ===============
+// ===========================================================================
 // Tasks
-// ===============
+// ===========================================================================
 
-// JADE - HTML
+// ===========================================================================
+// HTML Task
+// ===========================================================================
 
 gulp.task('html', function() {
     
-    gulp.src(path.jade + '/*.jade')
+    return gulp.src(path.jade + '/*.jade')
         .pipe(plumber({
             errorHandler: onError
         }))
@@ -85,14 +86,16 @@ gulp.task('html', function() {
             pretty: true
         }))
         .pipe(plumber.stop())
-        .pipe(gulp.dest(path.dist));
+        .pipe(gulp.dest(path.dist))
 });
 
-// STYLUS - CSS
 
+// ===========================================================================
+// CSS Task
+// ===========================================================================
 gulp.task('css', function() {
     
-    gulp.src(path.stylus + '/main.styl')
+    return gulp.src(path.stylus + '/main.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({
             errorHandler: onError
@@ -100,6 +103,7 @@ gulp.task('css', function() {
         .pipe(stylint())
         .pipe(changed(path.css_dist))
         .pipe(stylus({
+            'include css': true,
             use: [nib(), rupture()],
             compress: true
         }))
@@ -108,11 +112,13 @@ gulp.task('css', function() {
         }))
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(path.css_dist));
+        .pipe(gulp.dest(path.css_dist))
 });
 
-// IMAGES
 
+// ===========================================================================
+// Image Tasks
+// ===========================================================================
 gulp.task('jpg', function() {
     
     return gulp.src(path.jpg)
@@ -134,6 +140,11 @@ gulp.task('png', function() {
         .pipe(changed(path.img_dist))
         .pipe(pngmin())
         .pipe(plumber.stop())
+        .pipe(gulp.dest(path.img_dist));
+});
+
+gulp.task('favicon', function(){
+    return gulp.src(path.img_src + '/**/*.ico')
         .pipe(gulp.dest(path.img_dist));
 });
 
@@ -169,11 +180,12 @@ gulp.task('sprite', function() {
     spriteData.css.pipe(gulp.dest(path.stylus));
 });
 
-// JAVASCRIPT
-
+// ===========================================================================
+// JS Tasks
+// ===========================================================================
 gulp.task('js', ['js-hint'], function() {
     
-    browserify(path.js + '/main.js')
+    return browserify(path.js + '/main.js')
         .bundle()
         .pipe(source('main.js'))
         .pipe(buffer())
@@ -184,13 +196,14 @@ gulp.task('js', ['js-hint'], function() {
         .pipe(uglify())
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(path.js_dist));
+        .pipe(gulp.dest(path.js_dist))
 });
 
 
+// ===========================================================================
 // JS Hint
-
-gulp.task('js-hint', function() {
+// ===========================================================================
+gulp.task('js-hint', function(cb) {
     
     return gulp.src(path.js + '/**/*.js')
         .pipe(changed(path.js + '/**/*.js'))
@@ -200,14 +213,16 @@ gulp.task('js-hint', function() {
         .pipe(jshint())
         .pipe(jshint.reporter(stylish))
         .pipe(plumber.stop());
+
+    cb(err);
 });
 
+
+// ===========================================================================
 // Icon Task
-
-var fontName = "fonticon"
-
+// ===========================================================================
 gulp.task('iconfont', function() {
-    
+    var fontName = "fonticon";
     return gulp.src(path.icons, {
             base: './dist/fonts'
             })
@@ -224,21 +239,25 @@ gulp.task('iconfont', function() {
             .pipe(gulp.dest(path.font_dist + '/iconfont'));
 });
 
-// Clean
+
+// ===========================================================================
+// Clean Task
+// ===========================================================================
 gulp.task('clean', function(cb) {
     console.log('Cleaning files ...');
     del(['dist/css', 'dist/js', 'dist/img'], cb)
 });
 
 
-// WATCH
-
+// ===========================================================================
+// Watch Tasks
+// ===========================================================================
 gulp.task('watch', function() {
     
     gulp.watch(path.jade + '/**/*.jade', ['html']);
-    gulp.watch(path.icons, ['iconfont', 'css'])
     gulp.watch(path.stylus + '/**/*.styl', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
+
 });
 
 // BROWSER SYNC
@@ -251,6 +270,15 @@ gulp.task('sync', function() {
     });
 });
 
-// DEFAULT
+// ===========================================================================
+// Tasks
+// ===========================================================================
 gulp.task('default', ['html', 'css', 'js', 'watch', 'sync']);
-gulp.task('optimize', ['jpg', 'png', 'css']);
+
+gulp.task('optimize', ['jpg', 'png']);
+
+gulp.task('images', ['sprite', 'iconfont', 'optimize', 'favicon']);
+
+gulp.task('deploy', ['clean', 'images', 'html', 'css', 'js']);
+
+gulp.task('deploy:watch', ['images', 'html', 'css', 'js', 'watch', 'sync']);
