@@ -26,6 +26,7 @@ var gulp = require('gulp'),
     stylint = require('gulp-stylint'),
     buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
+    uncss = require('gulp-uncss'),
     gutil = require('gulp-util');
 
 
@@ -109,6 +110,25 @@ gulp.task('css', function() {
             use: [nib(), rupture()],
             compress: true
         }))
+        .pipe(uncss({
+            html: [path.dist + '/**/*.html'],
+            ignore: [
+                        /(#|\.)fancybox(\-[a-zA-Z]+)?/,
+                        // Bootstrap selectors added via JS
+                        /\w\.in/,
+                        ".fade",
+                        ".collapse",
+                        ".collapsing",
+                        /(#|\.)navbar(\-[a-zA-Z]+)?/,
+                        /(#|\.)carousel(\-[a-zA-Z]+)?/,
+                        /(#|\.)slide(\-[a-zA-Z]+)?/,
+                        /(#|\.)dropdown(\-[a-zA-Z]+)?/,
+                        /(#|\.)(open)/,
+                        // currently only in a IE conditional, so uncss doesn't see it
+                        ".close",
+                        ".alert-dismissible"
+                    ]
+        }))
         .pipe(rename({
             basename: 'style'
         }))
@@ -117,6 +137,34 @@ gulp.task('css', function() {
         .pipe(gulp.dest(path.dist_css))
 });
 
+gulp.task('css:minify', function() {
+    return gulp.src(path.dist_css + '/style.css')
+        .pipe(uncss({
+                    html: [path.dist + '/**/*.html'],
+                    ignore: [
+                                /(#|\.)fancybox(\-[a-zA-Z]+)?/,
+                                // Bootstrap selectors added via JS
+                                /\w\.in/,
+                                ".fade",
+                                ".collapse",
+                                ".collapsing",
+                                /(#|\.)navbar(\-[a-zA-Z]+)?/,
+                                /(#|\.)carousel(\-[a-zA-Z]+)?/,
+                                /(#|\.)slide(\-[a-zA-Z]+)?/,
+                                /(#|\.)dropdown(\-[a-zA-Z]+)?/,
+                                /(#|\.)(open)/,
+                                // currently only in a IE conditional, so uncss doesn't see it
+                                ".close",
+                                ".alert-dismissible"
+                            ]
+                }))
+                .pipe(rename({
+                    basename: 'style'
+                }))
+                .pipe(plumber.stop())
+                .pipe(sourcemaps.write('./'))
+                .pipe(gulp.dest(path.dist_css))
+});
 
 // ===========================================================================
 // Image Tasks
