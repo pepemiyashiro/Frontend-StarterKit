@@ -41,33 +41,53 @@
   to improve your experience.
   <![endif]-->
   <header>
-    <figure><img id="logo"/></figure>
-    <nav>
-      <ul>
-        <li><a href="#">Nosotros</a></li>
-        <li><a href="#">Ejemplos</a></li>
-      </ul>
-    </nav>
-  </header>
-  <div id="wrapper">
-    <div class="container">
-      <div class="row">
-        <div role="toolbar" class="btn-toolbar">
-          <button class="btn btn-default btn-xs"><span aria-hidden="true" class="glyphicon glyphicon-star">Star</span></button>
+    <div class="navbar-wrapper">
+      <div class="container">
+        <div role="navigation" class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">Project name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <span class="caret"></span></a>
+                  <ul role="menu" class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row"> 
-        <div class="Slider flexslider">
-          <ul class="Slider-slides slides">
-            <li><a href="#"><img src="http://lorempixel.com/640/480/animals/1/"/>
-                <p class="Slider-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, id, quam nam laudantium saepe aperiam eaque sint voluptatibus ipsum, sit nemo facere, magnam veniam unde vel. Vitae eius aperiam provident!</p></a></li>
-            <li><a href="#"><img src="http://lorempixel.com/640/480/animals/2/"/>
-                <p class="Slider-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, id, quam nam laudantium saepe aperiam eaque sint voluptatibus ipsum, sit nemo facere, magnam veniam unde vel. Vitae eius aperiam provident!</p></a></li>
-            <li><a href="#"><img src="http://lorempixel.com/640/480/animals/3/"/>
-                <p class="Slider-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, id, quam nam laudantium saepe aperiam eaque sint voluptatibus ipsum, sit nemo facere, magnam veniam unde vel. Vitae eius aperiam provident!</p></a></li>
-            <li><a href="#"><img src="http://lorempixel.com/640/480/animals/4/"/>
-                <p class="Slider-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, id, quam nam laudantium saepe aperiam eaque sint voluptatibus ipsum, sit nemo facere, magnam veniam unde vel. Vitae eius aperiam provident!</p></a></li>
-          </ul>
+    </div>
+  </header>
+  <div id="wrapper">
+    <div id="myCarousel" data-ride="carousel" class="carousel slide">
+      <!-- Indicators-->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active"><img src="http://lorempixel.com/640/480/animals/1/" alt="First slide"/>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example headline.</h1>
+              <p>Note: If you&apos;re viewing this page via a <code>file://</code> URL, the &quot;next&quot; and &quot;previous&quot; Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
+              <p><a href="#" role="button" class="btn btn-lg btn-primary">Sign up today</a></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-global.jQuery = require('jquery');
+global.jQuery = require('./vendor/jquery-1.11.3');
 var $ = jQuery;
 var bootstrap = require('./vendor/bootstrap');
 var sliders = require('./inc/sliders');
