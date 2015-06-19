@@ -1,12 +1,12 @@
-/**	
- * Ejemplo para invocar un módulo
- * @type {broserify}
+global.jQuery = require('jquery');
+var $ = jQuery;
+var bootstrap = require('./vendor/bootstrap');
+var sliders = require('./inc/sliders');
+
+
+/**
+ * Initicia el módulo sliders
+ * @type {Slider}
  */
 
-var example = require('./examples/example');
-var jquerySaludo = require('./examples/jquery-saludo');
-
-jquerySaludo.init();
-
-
-example.log('This is an Exmaple');
+sliders.init();

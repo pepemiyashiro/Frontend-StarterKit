@@ -2,8 +2,11 @@ extends template/layout
 
 block content
 	.container
-		.Slider
-			ul.Slider-slides
+		.btn-toolbar(role='toolbar')
+			button.btn.btn-default.btn-xs
+				span.glyphicon.glyphicon-star(aria-hidden="true") Star
+		.Slider.flexslider
+			ul.Slider-slides.slides
 				li
 					a(href="#")
 						img(src="http://lorempixel.com/640/480/animals/1/")

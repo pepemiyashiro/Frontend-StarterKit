@@ -43,17 +43,19 @@ var path = {
     jpg: 'source/images/*.jpg',
     // Png
     png: 'source/images/*.png',
-    // Fonts
+    // SVG 
     icons: 'source/svg/icons/**/*.svg',
+    // Fonts
+    fonts: 'source/fonts',
     // IMG Source
-    img_src: 'source/images',
+    imgages: 'source/images',
     // IMG
-    img_dist: 'dist/img',
+    dist_img: 'dist/img',
     // Dist Folder
     dist: 'dist/',
-    css_dist: 'dist/css',
-    js_dist: 'dist/js',
-    font_dist: 'dist/fonts'
+    dist_css: 'dist/css',
+    dist_js: 'dist/js',
+    dist_fonts: 'dist/fonts'
 };
 
 
@@ -101,7 +103,7 @@ gulp.task('css', function() {
             errorHandler: onError
         }))
         .pipe(stylint())
-        .pipe(changed(path.css_dist))
+        .pipe(changed(path.dist_css))
         .pipe(stylus({
             'include css': true,
             use: [nib(), rupture()],
@@ -112,7 +114,7 @@ gulp.task('css', function() {
         }))
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(path.css_dist))
+        .pipe(gulp.dest(path.dist_css))
 });
 
 
@@ -125,10 +127,10 @@ gulp.task('jpg', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(changed(path.img_dist))
+        .pipe(changed(path.dist_img))
         .pipe(imagemin())
         .pipe(plumber.stop())
-        .pipe(gulp.dest(path.img_dist));
+        .pipe(gulp.dest(path.dist_img));
 });
 
 gulp.task('png', function() {
@@ -137,22 +139,22 @@ gulp.task('png', function() {
         .pipe(plumber({
             errorHandler: onError
         }))
-        .pipe(changed(path.img_dist))
+        .pipe(changed(path.dist_img))
         .pipe(pngmin())
         .pipe(plumber.stop())
-        .pipe(gulp.dest(path.img_dist));
+        .pipe(gulp.dest(path.dist_img));
 });
 
 gulp.task('favicon', function(){
-    return gulp.src(path.img_src + '/**/*.ico')
-        .pipe(gulp.dest(path.img_dist));
+    return gulp.src(path.imgages + '/**/*.ico')
+        .pipe(gulp.dest(path.dist_img));
 });
 
 gulp.task('sprite', function() {
     
     var spriteData =
-        gulp.src(path.img_src + '/sprite/**/*.*')
-        .pipe(changed(path.img_src + '/sprite/**/*.*'))
+        gulp.src(path.imgages + '/sprite/**/*.*')
+        .pipe(changed(path.imgages + '/sprite/**/*.*'))
         .pipe(spritesmith({
             imgName: 'sprite.png',
             cssName: 'inc/sprite.styl',
@@ -166,7 +168,7 @@ gulp.task('sprite', function() {
         }));
 
     spriteData.img
-        .pipe(gulp.dest(path.img_dist));
+        .pipe(gulp.dest(path.dist_img));
     spriteData.img
         .pipe(imageResize({
             width: '50%',
@@ -176,7 +178,7 @@ gulp.task('sprite', function() {
         .pipe(rename(function(path) {
             path.basename = "sprite@2x";
         }))
-        .pipe(gulp.dest(path.img_dist));
+        .pipe(gulp.dest(path.dist_img));
     spriteData.css.pipe(gulp.dest(path.stylus));
 });
 
@@ -187,6 +189,7 @@ gulp.task('js', ['js-hint'], function() {
     
     return browserify(path.js + '/main.js')
         .bundle()
+        .on('error', onError)
         .pipe(source('main.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps:true}))
@@ -196,7 +199,7 @@ gulp.task('js', ['js-hint'], function() {
         .pipe(uglify())
         .pipe(plumber.stop())
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(path.js_dist))
+        .pipe(gulp.dest(path.dist_js))
 });
 
 
@@ -205,7 +208,7 @@ gulp.task('js', ['js-hint'], function() {
 // ===========================================================================
 gulp.task('js-hint', function(cb) {
     
-    return gulp.src(path.js + '/**/*.js')
+    return gulp.src([path.js + '/inc/*.js', path.js + '/*.js'])
         .pipe(changed(path.js + '/**/*.js'))
         .pipe(plumber({
             errorHandler: onError
@@ -226,7 +229,7 @@ gulp.task('iconfont', function() {
     return gulp.src(path.icons, {
             base: './dist/fonts'
             })
-            .pipe(changed(path.font_dist + '/iconfont'))
+            .pipe(changed(path.dist_fonts + '/iconfont'))
             .pipe(iconfontCss({
                 fontName: fontName,
                 path: 'source/stylus/template/_icons.css',
@@ -236,9 +239,17 @@ gulp.task('iconfont', function() {
             .pipe(iconfont({
                 fontName: fontName
             }))
-            .pipe(gulp.dest(path.font_dist + '/iconfont'));
+            .pipe(gulp.dest(path.dist_fonts + '/iconfont'));
 });
 
+// ===========================================================================
+// Fonts
+// ===========================================================================
+
+gulp.task('fonts', function(){
+    return gulp.src(path.fonts + '/**/*.*')
+        .pipe(gulp.dest(path.dist_fonts));
+});
 
 // ===========================================================================
 // Clean Task
@@ -255,7 +266,7 @@ gulp.task('clean', function(cb) {
 gulp.task('watch', function() {
     
     gulp.watch(path.jade + '/**/*.jade', ['html']);
-    gulp.watch(path.stylus + '/**/*.styl', ['css']);
+    gulp.watch(path.stylus + '/**/*.{styl,css}', ['css']);
     gulp.watch(path.js + '/**/*.js', ['js']);
 
 });
@@ -277,7 +288,7 @@ gulp.task('default', ['html', 'css', 'js', 'watch', 'sync']);
 
 gulp.task('optimize', ['jpg', 'png']);
 
-gulp.task('images', ['sprite', 'iconfont', 'optimize', 'favicon']);
+gulp.task('images', ['sprite', 'iconfont', 'optimize', 'favicon', 'fonts']);
 
 gulp.task('deploy', ['clean', 'images', 'html', 'css', 'js']);
 
