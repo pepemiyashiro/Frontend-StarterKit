@@ -21,7 +21,6 @@
     "browserify": "^10.2.4",
     "del": "^1.2.0",
     "gulp": "^3.8.11",
-    "gulp-bower-files": "^0.2.7",
     "gulp-changed": "^1.2.1",
     "gulp-concat": "^2.5.2",
     "gulp-iconfont": "^2.0.0",
