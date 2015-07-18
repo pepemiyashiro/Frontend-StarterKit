@@ -1,38 +1,43 @@
 // ===========================================================================
 // Dependencies
 // ===========================================================================
-var gulp = require('gulp'),
-    stylus = require('gulp-stylus'),
-    nib = require('nib'),
-    rupture = require('rupture'),
-    jade = require('gulp-jade'),
+
+    var gulp    = require('gulp'),
+    stylus      = require('gulp-stylus'),
+    nib         = require('nib'),
+    rupture     = require('rupture'),
+    jade        = require('gulp-jade'),
     browserSync = require('browser-sync'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    jshint = require('gulp-jshint'),
-    stylish = require('jshint-stylish'),
-    changed = require('gulp-changed'),
-    imagemin = require('gulp-imagemin'),
-    pngmin = require('gulp-pngmin'),
-    plumber = require('gulp-plumber'),
+    concat      = require('gulp-concat'),
+    uglify      = require('gulp-uglify'),
+    jshint      = require('gulp-jshint'),
+    stylish     = require('jshint-stylish'),
+    changed     = require('gulp-changed'),
+    imagemin    = require('gulp-imagemin'),
+    pngmin      = require('gulp-pngmin'),
+    plumber     = require('gulp-plumber'),
     spritesmith = require('gulp.spritesmith'),
     imageResize = require('gulp-image-resize'),
-    rename = require('gulp-rename'),
-    iconfont = require('gulp-iconfont'),
+    rename      = require('gulp-rename'),
+    iconfont    = require('gulp-iconfont'),
     iconfontCss = require('gulp-iconfont-css'),
-    del = require('del'),
-    browserify = require('browserify'),
-    source = require('vinyl-source-stream'),
-    stylint = require('gulp-stylint'),
-    buffer = require('vinyl-buffer'),
-    sourcemaps = require('gulp-sourcemaps'),
-    uncss = require('gulp-uncss'),
-    gutil = require('gulp-util');
+    del         = require('del'),
+    browserify  = require('browserify'),
+    source      = require('vinyl-source-stream'),
+    stylint     = require('gulp-stylint'),
+    buffer      = require('vinyl-buffer'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    uncss       = require('gulp-uncss'),
+    gutil       = require('gulp-util'),
+    watchify    = require('watchify'),
+    assign      = require('lodash.assign');
+
 
 
 // ===========================================================================
 // Paths URL
 // ===========================================================================
+
 var path = {
     // Jade to HTML
     jade: 'source/jade',
@@ -64,6 +69,7 @@ var path = {
 // ===========================================================================
 // Error Handler
 // ===========================================================================
+
 var onError = function(err) {
     gutil.beep();
     console.log(err);
@@ -73,7 +79,6 @@ var onError = function(err) {
 // ===========================================================================
 // Tasks
 // ===========================================================================
-
 // ===========================================================================
 // HTML Task
 // ===========================================================================
@@ -93,9 +98,11 @@ gulp.task('html', function() {
 });
 
 
+
 // ===========================================================================
 // CSS Task
 // ===========================================================================
+
 gulp.task('css', function() {
     
     return gulp.src(path.stylus + '/main.styl')
@@ -110,25 +117,6 @@ gulp.task('css', function() {
             use: [nib(), rupture()],
             compress: true
         }))
-        .pipe(uncss({
-            html: [path.dist + '/**/*.html'],
-            ignore: [
-                        /(#|\.)fancybox(\-[a-zA-Z]+)?/,
-                        // Bootstrap selectors added via JS
-                        /\w\.in/,
-                        ".fade",
-                        ".collapse",
-                        ".collapsing",
-                        /(#|\.)navbar(\-[a-zA-Z]+)?/,
-                        /(#|\.)carousel(\-[a-zA-Z]+)?/,
-                        /(#|\.)slide(\-[a-zA-Z]+)?/,
-                        /(#|\.)dropdown(\-[a-zA-Z]+)?/,
-                        /(#|\.)(open)/,
-                        // currently only in a IE conditional, so uncss doesn't see it
-                        ".close",
-                        ".alert-dismissible"
-                    ]
-        }))
         .pipe(rename({
             basename: 'style'
         }))
@@ -137,11 +125,17 @@ gulp.task('css', function() {
         .pipe(gulp.dest(path.dist_css))
 });
 
-gulp.task('css:minify', function() {
+/**
+ * UNCSS
+ */
+
+gulp.task('css:uncss', function() {
     return gulp.src(path.dist_css + '/style.css')
         .pipe(uncss({
                     html: [path.dist + '/**/*.html'],
                     ignore: [
+                                // Must Config 
+                                // Which clases must not be delted
                                 /(#|\.)fancybox(\-[a-zA-Z]+)?/,
                                 // Bootstrap selectors added via JS
                                 /\w\.in/,
@@ -169,6 +163,7 @@ gulp.task('css:minify', function() {
 // ===========================================================================
 // Image Tasks
 // ===========================================================================
+
 gulp.task('jpg', function() {
     
     return gulp.src(path.jpg)
@@ -230,30 +225,48 @@ gulp.task('sprite', function() {
     spriteData.css.pipe(gulp.dest(path.stylus));
 });
 
+
+
 // ===========================================================================
 // JS Tasks
 // ===========================================================================
-gulp.task('js', ['js-hint'], function() {
-    
-    return browserify(path.js + '/main.js')
-        .bundle()
-        .on('error', onError)
-        .pipe(source('main.js'))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps:true}))
-        .pipe(plumber({
-            errorHandler: onError
-        }))
-        .pipe(uglify())
-        .pipe(plumber.stop())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(path.dist_js))
-});
 
+// add custom browserify options here
+var customOpts = {
+  entries: [path.js + '/main.js'],
+  debug: true
+};
+
+var opts = assign({}, watchify.args, customOpts);
+var b = watchify(browserify(opts)); 
+
+function bundle() {
+  return b.bundle()
+    // log errors if they happen
+    //.on('error', onError)
+    .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+    .pipe(source('main.js'))
+    // optional, remove if you don't need to buffer file contents
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps:true}))
+    .pipe(plumber({
+        errorHandler: onError
+    }))
+    .pipe(uglify())
+    .pipe(plumber.stop())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(path.dist_js))
+}
+
+
+gulp.task('js', bundle); // so you can run `gulp js` to build the file
+b.on('update', bundle); // on any dep update, runs the bundler
+b.on('log', gutil.log); // output build logs to terminal
 
 // ===========================================================================
 // JS Hint
 // ===========================================================================
+
 gulp.task('js-hint', function(cb) {
     
     return gulp.src([path.js + '/inc/*.js', path.js + '/*.js'])
@@ -269,9 +282,11 @@ gulp.task('js-hint', function(cb) {
 });
 
 
+
 // ===========================================================================
 // Icon Task
 // ===========================================================================
+
 gulp.task('iconfont', function() {
     var fontName = "fonticon";
     return gulp.src(path.icons, {
@@ -290,6 +305,8 @@ gulp.task('iconfont', function() {
             .pipe(gulp.dest(path.dist_fonts + '/iconfont'));
 });
 
+
+
 // ===========================================================================
 // Fonts
 // ===========================================================================
@@ -299,18 +316,23 @@ gulp.task('fonts', function(){
         .pipe(gulp.dest(path.dist_fonts));
 });
 
+
+
 // ===========================================================================
 // Clean Task
 // ===========================================================================
+
 gulp.task('clean', function(cb) {
     console.log('Cleaning files ...');
     del(['dist/css', 'dist/js', 'dist/img'], cb)
 });
 
 
+
 // ===========================================================================
 // Watch Tasks
 // ===========================================================================
+
 gulp.task('watch', function() {
     
     gulp.watch(path.jade + '/**/*.jade', ['html']);
@@ -329,15 +351,14 @@ gulp.task('sync', function() {
     });
 });
 
+
+
 // ===========================================================================
 // Tasks
 // ===========================================================================
+
 gulp.task('default', ['html', 'css', 'js', 'watch', 'sync']);
-
 gulp.task('optimize', ['jpg', 'png']);
-
 gulp.task('images', ['sprite', 'iconfont', 'optimize', 'favicon', 'fonts']);
-
 gulp.task('deploy', ['clean', 'images', 'html', 'css', 'js']);
-
 gulp.task('deploy:watch', ['images', 'html', 'css', 'js', 'watch', 'sync']);

@@ -42,9 +42,11 @@
     "gulp-util": "^3.0.4",
     "gulp.spritesmith": "^3.5.4",
     "jshint-stylish": "^1.0.1",
+    "lodash.assign": "^3.2.0",
     "nib": "^1.1.0",
     "rupture": "^0.6.1",
     "stylus-iconfont": "^0.10.1",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.3.0"
   }
 }
