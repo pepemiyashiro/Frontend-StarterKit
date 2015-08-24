@@ -1,4 +1,6 @@
-include -doctype.jade
+include -config.jade
+doctype html
+html.no-js(lang='#{page.lang}')
 	head
 		include -head.jade
 	body
@@ -14,7 +16,7 @@ include -doctype.jade
 		#wrapper
 			
 			block content
-	
+
 		// END of #wrapper
 		
 		include -footer.jade
