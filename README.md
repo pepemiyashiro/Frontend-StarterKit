@@ -47,6 +47,11 @@ $ npm init
 $ gulp
 ```
 
+**Para compilar las imágenes:**
+```
+$ gulp images
+```
+
 **Para optimizar imágenes:**
 ```
 $ gulp optimize
@@ -103,7 +108,7 @@ Revisar documentación:
 
 ## **IconFonts** ##
 
-**Íconos de FontAwesome**
+**Iconos de FontAwesome**
 Hay íconos pre-cargados de FontAwesome. Dentro de la carpeta:
 
 
