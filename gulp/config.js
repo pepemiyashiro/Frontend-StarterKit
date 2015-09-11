@@ -1,3 +1,10 @@
 // Set variables
-var scr = '../source/';
-var dist = '../dist/';
+var source = './source/';
+var dist = './dist/';
+
+module.exports = {
+	path: {
+		source : source,
+		dist : dist
+	}
+}
