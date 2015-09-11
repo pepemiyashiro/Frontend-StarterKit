@@ -4,5 +4,6 @@ var config 		= require('../config.js'),
 gulp.task('watch', ['sync'], function() {
     
     gulp.watch(config.jade.source + '/**/*.jade', ['jade']);
+    gulp.watch(config.stylus.source + '/**/*.{styl,css}', ['stylus']);
 
 });

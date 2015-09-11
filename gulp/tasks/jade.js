@@ -8,7 +8,7 @@ var config 		= require('../config.js').jade,
 
 
 gulp.task('jade',function() {
-    return gulp.src(config.source + '/*.jade')
+    gulp.src(config.source + '/*.jade')
         .pipe(plumber({
             errorHandler: errorHandler
         }))

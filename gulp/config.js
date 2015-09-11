@@ -13,6 +13,11 @@ module.exports = {
 		dist: dist,
 	},
 
+	stylus: {
+		source: source + '/stylus',
+		dist: dist + '/css',
+	},
+
 	browserSync: {
 		files: [dist + '/**/*'],
 	    server: {

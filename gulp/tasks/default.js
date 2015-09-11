@@ -1,5 +1,5 @@
 var gulp 		= require('gulp');
 
-gulp.task('default', ['jade', 'watch'],function() {
+gulp.task('default', ['jade', 'stylus', 'watch'], function() {
 
 });
