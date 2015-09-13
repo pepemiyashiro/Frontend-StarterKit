@@ -18,6 +18,13 @@ module.exports = {
 		dist: dist + '/css',
 	},
 
+	iconfont: {
+		source: source + '/svgToFont',
+		dist: dist + '/iconfont',
+		template: './gulp/tasks/iconfont/_icons.css',
+		pathToStylus: ''
+	},
+
 	browserSync: {
 		files: [dist + '/**/*'],
 	    server: {
