@@ -10,19 +10,23 @@ module.exports = {
 
 	jade: {
 		source: source + '/jade',
-		dist: dist,
+		dist: dist
 	},
 
 	stylus: {
 		source: source + '/stylus',
-		dist: dist + '/css',
+		dist: dist + '/css'
 	},
 
 	iconfont: {
+		base: dist,
 		source: source + '/svgToFont',
 		dist: dist + '/iconfont',
 		template: './gulp/tasks/iconfont/_icons.css',
-		pathToStylus: ''
+		// Path to load the fonts on CSS tempalte
+		fontPath: '../iconfont/',
+		pathToStylusInc: '../../source/stylus/inc/iconfont.styl',
+		fontName: 'fonticon'
 	},
 
 	browserSync: {
