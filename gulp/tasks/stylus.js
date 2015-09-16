@@ -1,16 +1,16 @@
-var config  = require('../config.js').stylus,
-errorHandler= require('../helpers/errorHandler.js'),
-gulp    	= require('gulp'),
-stylus      = require('gulp-stylus'),
-minifyCss 	= require('gulp-minify-css'),
-nib         = require('nib'),
-rupture     = require('rupture'),
-sourcemaps  = require('gulp-sourcemaps'),
-plumber     = require('gulp-plumber'),
-rename      = require('gulp-rename'),
-changed     = require('gulp-changed');
+var config      = require('../config.js').stylus,
+errorHandler    = require('../helpers/errorHandler.js'),
+gulp    	    = require('gulp'),
+stylus          = require('gulp-stylus'),
+minifyCss 	    = require('gulp-minify-css'),
+nib             = require('nib'),
+rupture         = require('rupture'),
+sourcemaps      = require('gulp-sourcemaps'),
+plumber         = require('gulp-plumber'),
+rename          = require('gulp-rename'),
+changed         = require('gulp-changed');
 
-gulp.task('stylus', function() {
+gulp.task('stylus', ['images'] ,function() {
     gulp.src(config.source + '/main.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({

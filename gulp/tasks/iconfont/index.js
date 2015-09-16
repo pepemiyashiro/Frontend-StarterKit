@@ -32,5 +32,4 @@ gulp.task('iconfont', function() {
       timestamp: runTimestamp
     }))
     .pipe(gulp.dest(config.dist))
-    .pipe(browserSync.reload({stream:true}))
 });

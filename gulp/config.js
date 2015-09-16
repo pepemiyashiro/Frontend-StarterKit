@@ -29,12 +29,22 @@ module.exports = {
 		fontName: 'fonticon'
 	},
 
+	images:{
+		source: source + '/images',
+		dist: dist + '/img',
+		jpg: source + '/images/*.jpg',
+		png: source + '/images/*.png',
+		ico: source + '/images/*.ico'
+	},
+
 	browserSync: {
 		files: [dist + '/**/*'],
 	    server: {
      		// Serve up our build folder
      		baseDir: dist
- 		}
+ 		},
+
+ 		dist: dist
  	}
 
 }
