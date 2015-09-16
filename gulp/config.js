@@ -25,6 +25,7 @@ module.exports = {
 		template: './gulp/tasks/iconfont/_icons.css',
 		// Path to load the fonts on CSS tempalte
 		fontPath: '../iconfont/',
+		// Path Relative to the base
 		pathToStylusInc: '../../source/stylus/inc/iconfont.styl',
 		fontName: 'fonticon'
 	},
