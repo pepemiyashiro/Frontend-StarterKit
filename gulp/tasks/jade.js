@@ -5,8 +5,6 @@ var config 		     = require('../config.js').jade,
     plumber        = require('gulp-plumber'),
     jade 		       = require('gulp-jade');
 
-
-
 gulp.task('jade',function() {
     gulp.src(config.source + '/*.jade')
       .pipe(plumber({

@@ -8,7 +8,7 @@ var config 		     = require('../config.js').images,
 
 
 gulp.task('images', function() {
-
+  
 	// JPG process
   gulp.src(config.jpg)
     .pipe(plumber({
