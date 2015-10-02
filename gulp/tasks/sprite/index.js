@@ -11,42 +11,24 @@ var config      	= require('../../config.js').sprite,
 gulp.task('sprite', function() {
     
   var spriteData = gulp.src( config.source + '/**/*.*' )
-  	.pipe(plumber({
-  	    errorHandler: errorHandler
-  	}))
     .pipe( changed( config.source + '/**/*.*' ) )
     .pipe( spritesmith (
     	{
-	      imgName: 'sprite.png',
+        retinaSrcFilter: config.source + '/**/*@2x.*',
+        imgName: 'sprite.png',
+	      retinaImgName: 'sprite@2x.png',
 	      cssName: 'inc/sprite.styl',
-        // imgPath: '../img/sprite.png',
-	      // cssFormat: 'stylus',
-	      algorithm: 'binary-tree'
-	      // cssTemplate: config.template,
-	      // cssVarMap: function( sprite ) {
-	      //    sprite.name = 'spr-' + sprite.name
-	      // }
+        imgPath: '../img/sprite.png',
+        retinaImgPath: '../img/sprite@2x.png',
+	      cssFormat: 'stylus',
+	      algorithm: 'binary-tree',
+	      cssTemplate: config.templatePath,
+	      cssVarMap: function( sprite ) {
+	         sprite.name = 'spr-' + sprite.name
+	      }
     	}) 
     );
-    // .pipe(plumber.stop());
 
-  spriteData.img
-      .pipe(gulp.dest(config.dist))
-      .pipe(plumber.stop());
-
-  spriteData.img
-    .pipe(imageResize(
-    	{
-        width: '50%',
-        filter: 'Catrom',
-        sharpen: true
-    	})
-   	)
-    .pipe(rename(function(name) {
-      name.basename = "sprite@2x";
-    }))
-    .pipe(plumber.stop())
-    .pipe(gulp.dest(config.dist));
-      
+  spriteData.img.pipe(gulp.dest(config.dist))
   spriteData.css.pipe(gulp.dest(config.stylusPath));
 });
