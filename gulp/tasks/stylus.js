@@ -10,7 +10,7 @@ plumber         = require('gulp-plumber'),
 rename          = require('gulp-rename'),
 changed         = require('gulp-changed');
 
-gulp.task('stylus', ['images'] ,function() {
+gulp.task('stylus',function() {
     gulp.src(config.source + '/main.styl')
         .pipe(sourcemaps.init())
         .pipe(plumber({

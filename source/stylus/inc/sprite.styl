@@ -1,4 +1,114 @@
-spr-email = 0px 0px 0px 0px 28px 28px 56px 56px 'sprite.png'
-spr-hello = 28px 0px -28px 0px 28px 28px 56px 56px 'sprite.png'
-spr-home = 0px 28px 0px -28px 28px 28px 56px 56px 'sprite.png'
-spr-love = 28px 28px -28px -28px 28px 28px 56px 56px 'sprite.png'
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+$email_name = 'email';
+$email_x = 0px;
+$email_y = 0px;
+$email_offset_x = 0px;
+$email_offset_y = 0px;
+$email_width = 28px;
+$email_height = 28px;
+$email_total_width = 56px;
+$email_total_height = 56px;
+$email_image = '../sprite.png';
+$email = 0px 0px 0px 0px 28px 28px 56px 56px '../sprite.png' 'email';
+$hello_name = 'hello';
+$hello_x = 28px;
+$hello_y = 0px;
+$hello_offset_x = -28px;
+$hello_offset_y = 0px;
+$hello_width = 28px;
+$hello_height = 28px;
+$hello_total_width = 56px;
+$hello_total_height = 56px;
+$hello_image = '../sprite.png';
+$hello = 28px 0px -28px 0px 28px 28px 56px 56px '../sprite.png' 'hello';
+$home_name = 'home';
+$home_x = 0px;
+$home_y = 28px;
+$home_offset_x = 0px;
+$home_offset_y = -28px;
+$home_width = 28px;
+$home_height = 28px;
+$home_total_width = 56px;
+$home_total_height = 56px;
+$home_image = '../sprite.png';
+$home = 0px 28px 0px -28px 28px 28px 56px 56px '../sprite.png' 'home';
+$love_name = 'love';
+$love_x = 28px;
+$love_y = 28px;
+$love_offset_x = -28px;
+$love_offset_y = -28px;
+$love_width = 28px;
+$love_height = 28px;
+$love_total_width = 56px;
+$love_total_height = 56px;
+$love_image = '../sprite.png';
+$love = 28px 28px -28px -28px 28px 28px 56px 56px '../sprite.png' 'love';
+$spritesheet_width = 56px;
+$spritesheet_height = 56px;
+$spritesheet_image = '../sprite.png';
+$spritesheet_sprites = $email $hello $home $love;
+$spritesheet = 56px 56px '../sprite.png' $spritesheet_sprites;
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}

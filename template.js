@@ -194,6 +194,8 @@ gulp.task('favicon', function(){
         .pipe(gulp.dest(path.dist_img));
 });
 
+
+
 gulp.task('sprite', function() {
     
     var spriteData =
@@ -223,6 +225,7 @@ gulp.task('sprite', function() {
             path.basename = "sprite@2x";
         }))
         .pipe(gulp.dest(path.dist_img));
+        
     spriteData.css.pipe(gulp.dest(path.stylus));
 });
 

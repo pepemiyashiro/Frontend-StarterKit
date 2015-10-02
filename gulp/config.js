@@ -38,6 +38,13 @@ module.exports = {
 		ico: source + '/images/*.ico'
 	},
 
+	sprite:{
+		source: source + '/sprite',
+		dist: dist + '/img',
+		templatePath: './gulp/tasks/sprite/stylus.template.mustache',
+		stylusPath: source + '/stylus'
+	},
+
 	browserSync: {
 		files: [dist + '/**/*'],
 	    server: {

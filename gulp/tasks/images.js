@@ -7,12 +7,12 @@ var config 		     = require('../config.js').images,
 		plumber     	 = require('gulp-plumber');
 
 
-gulp.task('images', function() {
+gulp.task('images', ['sprite'], function() {
   
 	// JPG process
   gulp.src(config.jpg)
     .pipe(plumber({
-        errorHandler: onError
+        errorHandler: errorHandler
     }))
     .pipe(changed(config.dist))
     .pipe(imagemin())
@@ -22,7 +22,7 @@ gulp.task('images', function() {
   // PNG process
   gulp.src(config.png)
       .pipe(plumber({
-          errorHandler: onError
+          errorHandler: errorHandler
       }))
       .pipe(changed(config.dist))
       .pipe(pngmin())
