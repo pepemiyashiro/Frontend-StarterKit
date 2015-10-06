@@ -18,6 +18,11 @@ module.exports = {
 		dist: dist + '/css'
 	},
 
+	javascript: {
+		source: source + '/javascript',
+		dist: dist + '/js'
+	},
+
 	iconfont: {
 		base: dist,
 		source: source + '/svgToFont',

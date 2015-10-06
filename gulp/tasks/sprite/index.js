@@ -10,8 +10,8 @@ var config      	= require('../../config.js').sprite,
 
 gulp.task('sprite', function() {
     
-  var spriteData = gulp.src( config.source + '/**/*.*' )
-    .pipe( changed( config.source + '/**/*.*' ) )
+  var spriteData = gulp.src( config.source + '/**/*.{png,jpg,gif}' )
+    .pipe( changed( config.source + '/**/*.{png,jpg,gif}' ) )
     .pipe( spritesmith (
     	{
         retinaSrcFilter: config.source + '/**/*@2x.*',
