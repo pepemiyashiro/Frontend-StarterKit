@@ -1,0 +1,28 @@
+{
+	"auto_complete_selector": "source, text",
+	"bold_folder_labels": true,
+	"caret_style": "wide",
+	"color_scheme": "Packages/Seti_UI/Scheme/Seti_monokai.tmTheme",
+	"detect_indentation": true,
+	"font_size": 14,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 1,
+	"line_padding_top": 1,
+	"rulers":
+	[
+		80
+	],
+	"tab_size": 2,
+	"theme": "Seti.sublime-theme",
+	"word_wrap": true
+}

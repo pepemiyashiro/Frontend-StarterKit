@@ -10,7 +10,6 @@ Aplicativos para la compresión de imágenes.
 $ brew install pngquant
 ```
 
-
 **Imagemagik:**
 
 ```

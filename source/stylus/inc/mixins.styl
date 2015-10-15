@@ -1,19 +1,19 @@
-spriteWidth($sprite) {
+/**
+  Sprites Mixins
+**/
+
+spriteWidth($sprite)
   width: ($sprite[4] / 2)
-}
 
-spriteHeight($sprite) {
+spriteHeight($sprite)
   height: ($sprite[5] / 2)
-}
 
-spritePosition($sprite) {
+spritePosition($sprite)
   background-position: ($sprite[2] / 2) ($sprite[3] / 2)
-}
 
-spriteImage($sprite) {
-  background-image: url(../img/$sprite[8])
+spriteImage($sprite)
+  background-image: url($sprite[8])
   background-size: ($sprite[6] / 2)
-}
 
 sprite($sprite)
     if !match('hover', selector()) && !match('active', selector())

@@ -3,6 +3,7 @@
 // Add files inside ./inc folder.
 // ====================================================================
 
+@import "libs/normalize"
 @import "inc/sprite"
 @import "inc/mixins"
 @import "inc/iconfont"
@@ -16,30 +17,19 @@ rupture.scale-names = 'xs' 's' 'm' 'l' 'xl' 'hd'
 // ====================================================================
 // Site Styles
 // ====================================================================
-// Your Styles Here
-
-
-// .spr-email
-// 	sprite(spr-email)
-// 	+below(400px)
-// 		background: red
-
 
 .icof-user
 	color: blue
 
-
-
-
-
-
-
-
+.email
+	sprite(spr-email)
+	+retina()
+		background-image: url(../img/sprite@2x.png)
 
 
 // ====================================================================
 // Other
 // ====================================================================
 
-@import "inc/libs/helpers"
-@import "inc/print"
+@import "helpers/helpers"
+@import "helpers/print"
