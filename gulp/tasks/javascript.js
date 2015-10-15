@@ -1,6 +1,6 @@
 var config      = require('../config.js').javascript,
 errorHandler    = require('../helpers/errorHandler.js'),
-jshint      		= require('gulp-jshint'),
+jshint      	= require('gulp-jshint'),
 stylish         = require('jshint-stylish'),
 gulp            = require('gulp'),
 uglify          = require('gulp-uglify'),
@@ -10,7 +10,7 @@ buffer          = require('vinyl-buffer'),
 sourcemaps      = require('gulp-sourcemaps'),
 gutil           = require('gulp-util'),
 watchify        = require('watchify'),
-assign 			    = require('lodash.assign');
+assign 			= require('lodash.assign');
 
 // add custom browserify options here
 var customOpts = {
