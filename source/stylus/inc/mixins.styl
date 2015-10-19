@@ -3,17 +3,17 @@
 **/
 
 spriteWidth($sprite)
-  width: ($sprite[4] / 2)
+  width: ($sprite[4])
 
 spriteHeight($sprite)
-  height: ($sprite[5] / 2)
+  height: ($sprite[5])
 
 spritePosition($sprite)
-  background-position: ($sprite[2] / 2) ($sprite[3] / 2)
+  background-position: ($sprite[2]) ($sprite[3])
 
 spriteImage($sprite)
   background-image: url($sprite[8])
-  background-size: ($sprite[6] / 2)
+  background-size: ($sprite[6])
 
 sprite($sprite)
     if !match('hover', selector()) && !match('active', selector())
