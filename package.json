@@ -13,9 +13,14 @@
   "author": "Pepe Miyashiro",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer-stylus": "^0.8.0",
+    "axis": "^0.5.1",
     "flexslider": "^2.5.0",
+    "jeet": "^6.1.2",
     "jquery": "^2.1.4",
+    "nib": "^1.1.0",
     "require-dir": "^0.3.0",
+    "rupture": "^0.6.1",
     "vinyl-buffer": "^1.0.0"
   },
   "devDependencies": {
@@ -48,8 +53,6 @@
     "gulp.spritesmith": "^4.1.0",
     "jshint-stylish": "^2.0.1",
     "lodash.assign": "^3.2.0",
-    "nib": "^1.1.0",
-    "rupture": "^0.6.1",
     "stylus-iconfont": "^0.10.1",
     "through": "^2.3.8",
     "vinyl-source-stream": "^1.1.0",

@@ -5,6 +5,9 @@ stylus          = require('gulp-stylus'),
 minifyCss 	    = require('gulp-minify-css'),
 nib             = require('nib'),
 rupture         = require('rupture'),
+jeet            = require('jeet'),
+axis            = require('axis'),
+autoprefixer    = require('autoprefixer-stylus'),
 sourcemaps      = require('gulp-sourcemaps'),
 plumber         = require('gulp-plumber'),
 rename          = require('gulp-rename'),
@@ -19,7 +22,7 @@ gulp.task('stylus',function() {
         .pipe(changed(config.dist))
         .pipe(stylus({
             'include css': true,
-            use: [nib(), rupture()],
+            use: [axis(), nib(), rupture(), jeet(), autoprefixer()],
             compress: false,
             errors: true
         }))
