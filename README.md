@@ -1,5 +1,3 @@
-# **Web Starter** #
-
 ## **Instalar aplicaciones para OSX** ##
 
 Aplicativos para la compresión de imágenes.
