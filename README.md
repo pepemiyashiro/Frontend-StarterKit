@@ -1,4 +1,5 @@
-## **Instalar aplicaciones para OSX** ##
+## **Guía para Instalar aplicaciones para OSX** ##
+# Funciona también en windows sin problemas pero revisando la documentación de cada aplicativo #
 
 Aplicativos para la compresión de imágenes.
 
