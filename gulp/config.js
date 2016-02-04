@@ -18,12 +18,19 @@ module.exports = {
 		dist: dist + '/css'
 	},
 
+	scss: {
+		source: source + '/scss',
+		dist: dist + '/css'
+	},
+
 	javascript: {
 		source: source + '/javascript',
+		headscripts: source + '/javascript/headscripts',
 		dist: dist + '/js'
 	},
 
 	iconfont: {
+		// Must be se the css pre procesor extention dinamically
 		base: dist,
 		source: source + '/svgToFont',
 		dist: dist + '/iconfont',
@@ -31,7 +38,7 @@ module.exports = {
 		// Path to load the fonts on CSS tempalte
 		fontPath: '../iconfont/',
 		// Path Relative to the base
-		pathToStylusInc: '../../source/stylus/inc/iconfont.styl',
+		exportTo: '../../source/scss/2.tools/_iconfont.scss',
 		fontName: 'fonticon'
 	},
 
@@ -45,9 +52,14 @@ module.exports = {
 
 	sprite:{
 		source: source + '/sprite',
-		dist: dist + '/img',
-		templatePath: './gulp/tasks/sprite/stylus.template.mustache',
-		stylusPath: source + '/stylus'
+		dist: dist + '/img/sprites',
+		templatePath: './gulp/tasks/sprite/template.mustache',
+		mixinPath: source + '/scss/2.tools'
+	},
+
+	fonts:{
+		source: source + '/fonts',
+		dist: dist
 	},
 
 	browserSync: {

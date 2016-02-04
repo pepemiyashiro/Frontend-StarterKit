@@ -1,0 +1,19 @@
+{
+  "name": "Gulp-Template",
+  "description": "Gulp Workflow",
+  "main": "gulpfile.js",
+  "authors": [
+    "Pepe Miyashiro"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "susy": "~2.2.7"
+  }
+}

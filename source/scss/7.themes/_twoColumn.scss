@@ -1,0 +1,26 @@
+// ==========================================================================
+// Two Column
+// ==========================================================================
+
+#header{
+  @include span(12);
+
+  @include bp(min, 768px){
+    @include span(2);
+  }
+  background: $grey;
+}
+
+#wrapper{
+  @include span(12);
+  @include bp(min, 768px){
+    @include span(10);
+  }
+}
+
+#footer{
+  @include span(12);
+  @include center-block;
+
+  text-align: center;
+}

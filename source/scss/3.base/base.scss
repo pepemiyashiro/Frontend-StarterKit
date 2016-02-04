@@ -1,0 +1,13 @@
+body { font-size: $f-size; }
+
+
+// ==========================================================================
+// Typography
+// ==========================================================================
+
+h1 { @include fontSize(28px); }
+h2 { @include fontSize(22px); }
+h3 { @include fontSize(18px); }
+h4 { @include fontSize(16px); }
+h5 { @include fontSize(12px); }
+h6 { @include fontSize(12px); }

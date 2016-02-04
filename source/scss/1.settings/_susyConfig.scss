@@ -1,0 +1,73 @@
+$susy: (
+  /**
+   * Flow: 
+   * ltr | rtl
+   */
+  // flow: ltr, 
+
+  /**
+   * Output: 
+   * float | isolate
+   */
+  output: float,
+
+  /**
+   *  Math: 
+   *  fluid | static (requires column-width)
+   */
+  math: fluid,
+
+  /**
+   * Column Width:
+   * false | value
+   */
+  // column-width: false, 
+
+  /**
+   *  Container: 
+   *  length or % | auto
+   */
+  // container: auto,
+
+  /**
+   * Container Position: 
+   * left | center | right | <length> [*2] (grid padding)
+   */
+  // container-position: center,
+
+  // last-flow: to,
+
+  columns: 12,
+  
+  gutters: 1/4,
+  
+  /**
+   * Gutter Position:
+   * before | after | split | inside | inside-static (requires column-width)
+   */
+  gutter-position: inside,
+  
+  // global-box-sizing: content-box, // content-box | border-box (affects inside/inside-static)
+  
+  
+  /**
+   * Debug
+   */
+  debug: (
+    image: show,
+    color: blue,
+    output: overlay, // background | overlay
+    toggle: top right
+  ),
+
+  /**
+   * Custom
+   */  
+  use-custom: (
+    background-image: true, // look for background-image mixin
+    background-options: false, // look for background-size, -origin and -clip and other compass/bourbon mixins
+    box-sizing: true, // look for custom bix sizing mixin
+    clearfix: false, // true = look for internal clearfix before using micro clearfix
+    rem: true, // look for rem mixin
+  )
+);

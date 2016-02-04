@@ -1,5 +1,24 @@
-## **Guía para Instalar aplicaciones para OSX** ##
-### Funciona también en windows sin problemas pero revisando la documentación de cada aplicativo ###
+## **Instalar aplicaciones para OSX** ##
+
+Aplicativos para la compresión de imágenes.
+
+**pngquant**:
+
+```
+$ brew install pngquant
+```
+
+**Imagemagik:**
+
+```
+$ brew install imagemagick
+```
+
+**Graphics Magik**
+
+```
+$ brew install graphicsmagick
+```
 
 
 ## **Instalar Dependencias** ##

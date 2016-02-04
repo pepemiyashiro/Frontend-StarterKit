@@ -1,5 +1,5 @@
 var gutil       = require('gulp-util'),
-		log         = require('fancy-log');
+    log         = require('fancy-log');
 
 onError = function(err) {
     gutil.beep();

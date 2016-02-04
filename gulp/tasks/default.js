@@ -1,3 +1,5 @@
-var gulp 		= require('gulp');
+var gulp 		 = require('gulp'),
+    sequence = require('gulp-sequence');
 
-gulp.task('default', ['stylus', 'jade', 'javascript', 'watch', 'browserSync'], function() {});
+// gulp.task('default', ['browserSync', 'fonts', 'iconfont', 'sprite', 'images', 'scss', 'javascript', 'watch']);
+gulp.task('default', sequence( [ 'fonts', 'iconfont', 'sprite'], 'jade', 'scss', 'javascript', 'watch', 'browserSync') );
