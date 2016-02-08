@@ -1,5 +1,9 @@
 ## **Instalar aplicaciones para OSX** ##
 
+# This project has been inspired on:
+
+- (Viget Labs - Gulp Starter)[https://github.com/vigetlabs/gulp-starter]
+
 Aplicativos para la compresión de imágenes.
 
 **pngquant**:

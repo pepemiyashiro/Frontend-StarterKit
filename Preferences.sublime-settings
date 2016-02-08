@@ -20,8 +20,7 @@
 	[
 		"*.tmp",
 		"*.git",
-		"node_modules",
-		"bower_components"
+		"node_modules"
 	],
 	"font_size": 14,
 	"highlight_line": true,
