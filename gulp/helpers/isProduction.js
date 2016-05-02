@@ -5,7 +5,7 @@ var isProduction = (gutil.env.env === 'production') ? true : false;
 
 (function () {
   var currentEnv = (isProduction) ? 'Production' : 'Development';
-  log( gutil.colors.blue( 'ENV: ' +  currentEnv) );
+  log( gutil.colors.blue( '\n_______________\n\nENV:' +  currentEnv + '\n_______________') );
 })();
 
 module.exports = isProduction;
