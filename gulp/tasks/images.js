@@ -10,8 +10,9 @@ var config 		     = require('../config.js').images,
 		plumber     	 = require('gulp-plumber');
 
 
-gulp.task('images:jpg', function() {
-  return gulp.src(config.jpg)
+gulp.task('images:all', function() {
+  console.log(config.source + '/**/*');
+  return gulp.src(config.source + '/**/*')
     .pipe(plumber({
         errorHandler: errorHandler
     }))
@@ -21,17 +22,6 @@ gulp.task('images:jpg', function() {
     .pipe(gulp.dest(config.dist))
 });
 
-gulp.task('images:png', function() {
-  return gulp.src(config.png)
-      .pipe(plumber({
-          errorHandler: errorHandler
-      }))
-      .pipe(changed(config.dist))
-      .pipe( isProduction === true ? pngmin() : gutil.noop() )
-      .pipe(plumber.stop())
-      .pipe(gulp.dest(config.dist))
-});
-
 gulp.task('images:fav', function() {
   return gulp.src(config.ico)
   	.pipe(changed(config.dist))
@@ -39,4 +29,4 @@ gulp.task('images:fav', function() {
 });
 
 
-gulp.task('images', ['images:jpg', 'images:png', 'images:fav'] );
+gulp.task('images', ['images:all', 'images:fav'] );

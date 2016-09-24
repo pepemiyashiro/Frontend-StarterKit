@@ -45,8 +45,6 @@ module.exports = {
 	images:{
 		source: source + '/images',
 		dist: dist + '/img',
-		jpg: source + '/images/*.jpg',
-		png: source + '/images/*.png',
 		ico: source + '/images/*.ico'
 	},
 
