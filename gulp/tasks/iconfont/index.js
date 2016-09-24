@@ -24,7 +24,7 @@ gulp.task('iconfont', function() {
     }))
     .pipe(iconfont({
       fontName: config.fontName,
-      appendUnicode: true,
+      prependUnicode: true,
       timestamp: runTimestamp
     }))
     .pipe(gulp.dest(config.dist))
