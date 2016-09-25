@@ -6,11 +6,11 @@ var config 		     = require('../config.js').images,
     gutil          = require('gulp-util'),
 		changed     	 = require('gulp-changed'),
 		imagemin    	 = require('gulp-imagemin'),
-		pngmin       	 = require('gulp-pngmin'),
 		plumber     	 = require('gulp-plumber');
 
 
 gulp.task('images:all', function() {
+  console.log(config.source + '/**/*');
   return gulp.src(config.source + '/**/*')
     .pipe(plumber({
         errorHandler: errorHandler

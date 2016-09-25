@@ -7,9 +7,12 @@ var config         = require('../config.js').scss,
     sass           = require('gulp-sass'),
     changed        = require('gulp-changed'),
     sourcemaps     = require('gulp-sourcemaps'),
-    cssnano        = require('gulp-cssnano'),
-    autoprefixer   = require('gulp-autoprefixer'),
+    autoprefixer   = require('autoprefixer'),
+    postcss        = require('gulp-postcss'),
     rename         = require('gulp-rename'),
+    csso           = require('postcss-csso'),
+    flexbugsfixes  = require('postcss-flexbugs-fixes'),
+    mqpacker       = require('css-mqpacker'),
     plumber        = require('gulp-plumber');
 
 gulp.task('scss', function () {
@@ -19,12 +22,17 @@ gulp.task('scss', function () {
         errorHandler: errorHandler
     }))
     .pipe(changed(config.dist))
-    .pipe(sass())
-    .pipe(autoprefixer())
-    .pipe( isProduction === true ? cssnano() : gutil.noop() )
+    .pipe(sass({ indentedSyntax : false }))
+    // .pipe( isProduction === true ? cssnano() : gutil.noop() )
     .pipe(rename({
         basename: 'style'
     }))
+    .pipe(postcss([ 
+            autoprefixer({ browsers: ['last 2 versions'] }), 
+            flexbugsfixes(),
+            csso(),
+            mqpacker({ sort : true })
+        ]))
     .pipe(sourcemaps.write('./'))
     .pipe(plumber.stop())
     .pipe(gulp.dest(config.dist))

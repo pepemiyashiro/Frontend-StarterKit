@@ -14,9 +14,9 @@ module.exports = {
 	},
 
 	nunjucks: {
-		source: source + '/nunjucks',
-		dist: dist
-	},
+    source: source + '/nunjucks',
+    dist: dist
+  },
 
 	stylus: {
 		source: source + '/stylus',
