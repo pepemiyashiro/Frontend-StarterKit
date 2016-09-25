@@ -11,7 +11,6 @@ var config 		     = require('../config.js').images,
 
 
 gulp.task('images:all', function() {
-  console.log(config.source + '/**/*');
   return gulp.src(config.source + '/**/*')
     .pipe(plumber({
         errorHandler: errorHandler

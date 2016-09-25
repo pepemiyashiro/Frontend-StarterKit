@@ -13,6 +13,11 @@ module.exports = {
 		dist: dist
 	},
 
+	nunjucks: {
+		source: source + '/nunjucks',
+		dist: dist
+	},
+
 	stylus: {
 		source: source + '/stylus',
 		dist: dist + '/css'
